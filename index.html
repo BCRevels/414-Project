@@ -27,25 +27,21 @@
       <h3>Sample text</h3>
       <p>Sample text goes here</p>
     </div>
-
     <!-- You can also require other files to run in this process -->
     <script>
       function openTab(evt, tabAction) {
         // Declare all variables
         var t, tabcnt, tablnks;
-
         // Get all elements with class="tabcnt" and hide them
         tabcnt = document.getElementsByClassName("tabcnt");
         for (i = 0; i < tabcnt.length; i++) {
           tabcnt[i].style.display = "none";
         }
-
         // Get all elements with class="tablnks" and remove the class "active"
         tablnks = document.getElementsByClassName("tablnks");
         for (i = 0; i < tablnks.length; i++) {
           tablnks[i].className = tablnks[i].className.replace(" active", "");
         }
-
         // Show the current tab, and add an "active" class to the link that opened the tab
         document.getElementById(tabAction).style.display = "block";
         evt.currentTarget.className += " active";

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-	<script src="./renderer.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <title>Hello World!</title>
   </head>
   <body>
@@ -10,10 +10,43 @@
     We are using Node.js <span id="node-version"></span>,
     Chromium <span id="chrome-version"></span>,
     and Electron <span id="electron-version"></span>.
-	</br>
-	<input type="button" id="btnEd" value="Say hi" onclick="hiThere()"/>
-
+    <div class="tab">
+      <button class="Tablinks" onclick="OpenTab(event,'Download')" id="defaultOpen">Download</button>
+      <button class="Tablinks" onclick="OpenTab(event,'Batches')">Batches</button>
+      <button class="Tablinks" onclick="OpenTab(event,'Settings')">Settings</button>
+    </div>
+    <div id="downloadTab" class="tabcnt">
+    <h3>Sample text</h3>
+      <p>Sample text goes here</p>
+    </div>
+    <div id="batchesTab" class="tabcnt">
+      <h3>Sample text</h3>
+      <p>Sample text goes here</p>
+    </div>
+    <div id="settingsTab" class="tabcnt">
+      <h3>Sample text</h3>
+      <p>Sample text goes here</p>
+    </div>
     <!-- You can also require other files to run in this process -->
-    
+    <script>
+      function openTab(evt, tabAction) {
+        // Declare all variables
+        var t, tabcnt, tablnks;
+        // Get all elements with class="tabcnt" and hide them
+        tabcnt = document.getElementsByClassName("tabcnt");
+        for (i = 0; i < tabcnt.length; i++) {
+          tabcnt[i].style.display = "none";
+        }
+        // Get all elements with class="tablnks" and remove the class "active"
+        tablnks = document.getElementsByClassName("tablnks");
+        for (i = 0; i < tablnks.length; i++) {
+          tablnks[i].className = tablnks[i].className.replace(" active", "");
+        }
+        // Show the current tab, and add an "active" class to the link that opened the tab
+        document.getElementById(tabAction).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+    </script>
+    <script src="./renderer.js"></script>
   </body>
 </html>

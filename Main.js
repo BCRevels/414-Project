@@ -13,6 +13,7 @@ function createWindow () {
     width: 1000,
     height: 600,
     webPreferences: {
+	  nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js')
     }
   })
@@ -52,13 +53,3 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-const { exec } = require('child_process');
-
-exec('youtube-dl --no-playlist https://www.youtube.com/watch?v=QZeto4CIf84', (error, stdout, stderr) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-  console.error(`stderr: ${stderr}`);
-});

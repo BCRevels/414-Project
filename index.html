@@ -27,6 +27,13 @@
       <h3>Sample text</h3>
       <p>Sample text goes here</p>
     </div>
+	
+	<!-- URL desired is put here. Youtube-dl handles the rest.  As long as they have the same type and id, these
+		  should be able to be placed anywhere. Feel free to mess with the styling -->
+	<input type="text" id="videoInput" style="width: 50%;"/>
+	<input type="button" id="submitButton" onclick="youtubeDlDownload()" value="Download"/>
+	
+	
     <!-- You can also require other files to run in this process -->
     <script>
       function openTab(evt, tabAction) {

@@ -15,20 +15,25 @@ body {
   border: 5px solid black;
 }
 
-#title{
-text-align: center;
-  text-transform: capitalize;
-  text-decoration: none;
-  font-size: 15px;
-}
-
 /* Style the tab */
 .tab {
+  display:grid;
+  grid-gap: 10px 10px;
+  grid-template-rows: auto auto auto;
+  padding: 10px;
   float: left;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
   width: 30%;
   height: 300px;
+}
+
+/* Style tab links */
+.Tablinks {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -74,3 +79,9 @@ text-align: center;
   display:none;
 }
 
+.Tablinks {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}

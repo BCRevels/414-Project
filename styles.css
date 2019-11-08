@@ -11,7 +11,7 @@ body {
   width: auto;
   height: 500px;
   background-color: #FFFFF9;
-  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+  background-image: radial-gradient( rgba(255,0,0,0), rgb(255, 32, 32));
   border: 5px solid black;
 }
 
@@ -26,6 +26,7 @@ body {
   background-color: #f1f1f1;
   width: 30%;
   height: 300px;
+  text-align: right;
 }
 
 /* Style tab links */

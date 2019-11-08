@@ -29,7 +29,7 @@ alert(histContent);
 function youtubeDlDownload() {
 	var url = document.getElementById('videoInput').value;
 	
-	exec('youtube-dl --no-playlist ' + url, (error, stdout, stderr) => {
+	exec('python ./youtube-dl --no-playlist ' + url, (error, stdout, stderr) => {
 	if (error) {
 		alert(`exec error: ${error}`);
 		return;

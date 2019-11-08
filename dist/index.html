@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/styles.8986bff4.css">
+    <title>YOUTUBE DL-GUI</title>
+
+  <script src="/styles.8986bff4.js"></script></head>
+  <body> 
+    <!-- Puts the header as a svg -->
+  <svg height="40" width="2000">    
+    <rect width="1325" height="80" background="#FFFFF9" style="fill:rgb(0,0,0);stroke-width:8;stroke:rgb(0,0,0)"></rect>
+    <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="520" y="30">YOUTUBE-DL GUI</text>
+    <h3 style="text-align: center">Your only destination to download any videos, legally!</h3>
+  </svg>
+
+    We are using Node.js <span id="node-version"></span>,
+    Chromium <span id="chrome-version"></span>,
+    and Electron <span id="electron-version"></span>.
+
+<div class="tab">
+      <button class="Tablinks" onclick="dFunction()">Download</button>
+      <button class="Tablinks" onclick="bFunction()">Batches</button>
+      <button class="Tablinks" onclick="sFunction()">Settings</button>
+    </div>
+
+  <div id="downloadTab" class="tabcnt">
+    <h3>Download</h3>
+    <p>Sample text goes here</p>
+    </div>
+
+    <div id="batchesTab" class="tabcnt">
+      <h3>Batches</h3>
+    <p>Sample text goes here</p>
+    </div>
+
+    <div id="settingsTab" class="tabcnt">
+     <h3>Settings</h3>
+    <p>Sample text goes here</p>
+    </div> 
+    
+<!-- The content are shown when the buttons are clicked -->
+<script>function dFunction() {
+  var x = document.getElementById("downloadTab");
+  var y = document.getElementById("batchesTab");
+  var z = document.getElementById("settingsTab");
+  x.style.display = "block";
+  y.style.display = "none";
+  z.style.display = "none";
+}</script>
+
+<script>function bFunction() {
+  var x = document.getElementById("downloadTab");
+  var y = document.getElementById("batchesTab");
+  var z = document.getElementById("settingsTab");
+  x.style.display = "none";
+  y.style.display = "block";
+  z.style.display = "none";
+}</script>
+
+<script>function sFunction() {
+  var x = document.getElementById("downloadTab");
+  var y = document.getElementById("batchesTab");
+  var z = document.getElementById("settingsTab");
+  x.style.display = "none";
+  y.style.display = "none";
+  z.style.display = "block";
+}</script>
+	
+	<!-- URL desired is put here. Youtube-dl handles the rest.  As long as they have the same type and id, these
+		  should be able to be placed anywhere. Feel free to mess with the styling -->
+	<input type="text" id="videoInput" style="width: 50%; height: 5%">
+	<input type="button" id="submitButton" onclick="youtubeDlDownload()" value="Download">
+	
+	<ul id="history-table">
+		
+	</ul>
+    <!-- You can also require other files to run in this process -->
+    <script>function openTab(evt, tabAction) {
+  // Declare all variables
+  var t, tabcnt, tablnks; // Get all elements with class="tabcnt" and hide them
+
+  tabcnt = document.getElementsByClassName("tabcnt");
+
+  for (i = 0; i < tabcnt.length; i++) {
+    tabcnt[i].style.display = "none";
+  } // Get all elements with class="tablnks" and remove the class "active"
+
+
+  tablnks = document.getElementsByClassName("tablnks");
+
+  for (i = 0; i < tablnks.length; i++) {
+    tablnks[i].className = tablnks[i].className.replace(" active", "");
+  } // Show the current tab, and add an "active" class to the link that opened the tab
+
+
+  document.getElementById(tabAction).style.display = "block";
+  evt.currentTarget.className += " active";
+}</script>
+    <script src="/renderer.3db12799.js"></script>
+  </body>
+</html>

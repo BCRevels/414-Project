@@ -1,0 +1,1 @@
+youtube-dl --no-playlist %1

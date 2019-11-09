@@ -1,27 +1,41 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
-
 const path = require('path')
+const Storage = require('./storage.js')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+//storage file
+const storage = new Storage({
+	configName: 'youtubedl-gui-local-data',
+	defaults: {
+		windowBounds: { width: 1000, height: 600},
+		history: new Array("null")
+	}
+});
+
 function createWindow () {
+	//get stored window height and width
+	let{ width, height } = storage.get('windowBounds');
+	
+	//creates the storage file. I don't know if there is a better way to do it but
+	//	this is the best way to guarentee a storage file is made.
+	storage.set('initiate', 'on');
+	
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: width,
+    height: height,
     webPreferences: {
+	  nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js')
     }
   })
-
+  
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
-  // mainWindow.setFullScreen(true)
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -30,6 +44,13 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+  
+  //when the window is resized, this data is saved. When the app is opened again it will start with the window 
+  //	size it was closed on
+  mainWindow.on('resize', () => {
+		let { width, height } = mainWindow.getBounds();
+		storage.set('windowBounds', { width, height });
+  });
 }
 
 // This method will be called when Electron has finished
@@ -52,13 +73,3 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-const { exec } = require('child_process');
-
-exec('youtube-dl --no-playlist https://www.youtube.com/watch?v=QZeto4CIf84', (error, stdout, stderr) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-  console.error(`stderr: ${stderr}`);
-});

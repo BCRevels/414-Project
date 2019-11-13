@@ -52,7 +52,7 @@ body {
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  background-color: #de4e5a;
 }
 
 /* Create an active/current "tab button" class */
@@ -69,9 +69,6 @@ body {
   border-left: none;
 }
 
-#downloadTab{
-  display:none;
-}
 #batchesTab{
   display:none;
 }
@@ -85,3 +82,59 @@ body {
   font-size: 30px;
   text-align: center;
 }
+
+#reset {
+display: grid;
+ grid-template-columns: 140px 140px; 
+  grid-template-rows: 80px 80px; 
+  grid-gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+#batches{
+display: grid;
+ grid-template-columns: 140px 140px; 
+  grid-template-rows: 80px 80px; 
+  grid-gap: 8px;
+  justify-content: left;
+  align-items: center;
+}
+
+/* Customized buttons */
+#resetField{
+  background-color: #e7e7e7; color: black;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+#resetField:hover{
+  background-color: #de4e5a;
+}
+
+#addToList{
+  background-color: #e7e7e7; color: black;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+#addToList:hover{
+  background-color: #de4e5a;
+}
+
+#startDownload{
+  background-color: #e7e7e7; color: black;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+#startDownload:hover{
+  background-color: #de4e5a;
+}
+

@@ -101,6 +101,15 @@ display: grid;
   align-items: center;
 }
 
+#settings{
+  display: grid;
+ grid-template-columns: 140px 140px; 
+  grid-template-rows: 80px 80px; 
+  grid-gap: 20px;
+  justify-content: left;
+  align-items: center;
+}
+
 /* Customized buttons */
 #resetField{
   background-color: #e7e7e7; color: black;
@@ -137,4 +146,15 @@ display: grid;
 #startDownload:hover{
   background-color: #de4e5a;
 }
+
+#clearAll{
+  background-color: #e7e7e7; color: black;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+#clearAll:hover{
+  background-color: #de4e5a;
 

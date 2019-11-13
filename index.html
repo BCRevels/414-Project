@@ -85,10 +85,26 @@
     </datalist>
     </div>
 
-    <div id="settingsTab" class="tabcnt">
-     <h3>Settings</h3>
-    <p>Sample text goes here</p>
+  <div id="settingsTab" class="tabcnt">
+    <input list="audioFormats" name="audioFormat" placeholder="Audio Format">
+        <datalist id="audioFormats">
+          <option value="mp3">
+          <option value="m4a">
+          <option value="wav">
+          <option value="flac">
+        </datalist>
+    
+    <input list="videoFormats" name="videoFormat" placeholder="Video Format">
+        <datalist id="videoFormats">
+          <option value="webm">
+          <option value="mkv">
+          <option value="mp4">
+        </datalist>
+    <div id="settings">
+      <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Downloads" />
+      <input type="button" id="clearAll" onclick="" value="Clear All" />
     </div>
+  </div>
 
 <!-- The content are shown when the buttons are clicked -->
 <script>

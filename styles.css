@@ -10,8 +10,8 @@ html {
 body {
   width: auto;
   height: 500px;
-  background-color: #FFFFF9;
-  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+  background-color: #edd5d5;
+  /* background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); */
   border: 5px solid black;
 }
 
@@ -24,7 +24,7 @@ body {
   float: left;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
-  width: 30%;
+  width: 25%;
   height: 300px;
 }
 
@@ -72,6 +72,7 @@ body {
 #batchesTab{
   display:none;
 }
+
 #settingsTab{
   display:none;
 }
@@ -155,6 +156,16 @@ display: grid;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
 }
+
 #clearAll:hover{
   background-color: #de4e5a;
+}
+
+.footer{
+  text-align: center;
+    font-size: 15px;
+    color: white; 
+    padding: 1px;
+    margin-left: 431px; 
+}
 

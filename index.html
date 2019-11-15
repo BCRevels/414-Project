@@ -78,6 +78,11 @@ function sFunction() {
 	<input type="text" id="videoInput" style="width: 50%; height: 5%"/>
 	<input type="button" id="submitButton" onclick="youtubeDlDownload()" value="Download"/>
 	
+	<!-- This is the loading bar -->
+	<svg width="100%" height="100">
+		<rect id="loadingBar" width="0" height="100" style="fill:rgb(0,200,0);" />
+	</svg>
+	
 	<ul id="history-table">
 		
 	</ul>

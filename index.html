@@ -6,17 +6,13 @@
     <title>YOUTUBE DL-GUI</title>
 
   </head>
-  <body> 
+  <body>
     <!-- Puts the header as a svg -->
-  <svg height="40" width="2000">    
+  <svg height="40" width="2000">
     <rect width="1325" height="80" background="#FFFFF9" style="fill:rgb(0,0,0);stroke-width:8;stroke:rgb(0,0,0)" />
     <text fill="#d9473d" style="text-align: center" font-size="26" font-family="Manjari,sans-serif" x="580" y="30">YOUTUBE-DL GUI</text>
     <h3 style="text-align: center">Your only destination to download any videos, legally!</h3>
   </svg>
-
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
 
 <div class="tab">
       <button class="Tablinks" onclick="dFunction()">Download</button>
@@ -25,20 +21,91 @@
     </div>
 
   <div id="downloadTab" class="tabcnt">
-    <h3>Download</h3>
-    <p>Sample text goes here</p>
+    <!-- URL desired is put here. Youtube-dl handles the rest.  As long as they have the same type and id, these
+        should be able to be placed anywhere. Feel free to mess with the styling -->
+        <p>URL to Video:</p>
+        <input type="text" id="videoInput" placeholder="https://www.youtube.com/watch" style="width: 50%; height: 5%"/>
+
+        <p>What to Download:</p>
+        <input type="checkbox"  name="audioWithSound" value="">Audio w/ Sound
+        <input type="checkbox"  name="audioWithSound" value="">Audio Only
+        <input type="checkbox"  name="audioWithSound" value="">Keep Both
+
+        <br>
+        <!-- drop down list for video formats-->
+        <input list="videoFormats" name="videoFormat" placeholder="Video Format">
+        <datalist id="videoFormats">
+          <option value="webm">
+          <option value="mkv">
+          <option value="mp4">
+        </datalist>
+
+        <!-- drop down list for audio formats-->
+        <input list="audioFormats" name="audioFormat" placeholder="Audio Format">
+        <datalist id="audioFormats">
+          <option value="mp3">
+          <option value="m4a">
+          <option value="wav">
+          <option value="flac">
+        </datalist>
+
+        <p>Download Directory</p>
+        <input type="text" id="downloadDirectory" placeholder="/home/user/Downloads" style="width: 50%; height: 5%"/>
+
+        <p>File Name:</p>
+        <input type="text" id="fileName" placeholder="Video1" style="width: 35%; height: 5%"/>
+        <input type="checkbox"  name="defaultValues" value="">Use Default
+        <br>
+
+        <div id = "reset">
+        <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Download" />
+        <input type="button" id="resetField" onclick="" value="Reset Field" />
+        </div>
     </div>
 
     <div id="batchesTab" class="tabcnt">
-      <h3>Batches</h3>
-    <p>Sample text goes here</p>
+    <p>Download Directory:</p>
+    <input type="text" placeholder="/home/user/Downloads" style="width: 50%; height: 5%"/>
+
+    <p>URL to Video:</p>
+    <input type="text" placeholder="https://www.youtube.com/watch" style="width: 50%; height: 5%"/>
+    <input list="resolutionFormats" name="resolution" placeholder="Resolution" style="width:15%; height: 5%">
+    
+    <div id="batches">
+    <input type="button" id="addToList" onclick="" value="Add to List" />
+    <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Downloads" />
     </div>
 
-    <div id="settingsTab" class="tabcnt">
-     <h3>Settings</h3>
-    <p>Sample text goes here</p>
-    </div> 
+    <datalist id="resolutionFormats">
+      <option value="1080p">
+      <option value="720p">
+      <option value="480p">
+      <option value="240p">
+    <input type="button" id="clearAll" onclick="" value="Clear All" />
+    </datalist>
+    </div>
+
+  <div id="settingsTab" class="tabcnt">
+    <input list="audioFormats" name="audioFormat" placeholder="Audio Format">
+        <datalist id="audioFormats">
+          <option value="mp3">
+          <option value="m4a">
+          <option value="wav">
+          <option value="flac">
+        </datalist>
     
+    <input list="videoFormats" name="videoFormat" placeholder="Video Format">
+        <datalist id="videoFormats">
+          <option value="webm">
+          <option value="mkv">
+          <option value="mp4">
+        </datalist>
+    <div id="settings">
+      <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Downloads" />
+      <input type="button" id="clearAll" onclick="" value="Clear All" />
+    </div>
+  </div>
+
 <!-- The content are shown when the buttons are clicked -->
 <script>
 function dFunction() {
@@ -72,11 +139,16 @@ function sFunction() {
   z.style.display = "block";
 }
 </script>
-	
-	<!-- URL desired is put here. Youtube-dl handles the rest.  As long as they have the same type and id, these
-		  should be able to be placed anywhere. Feel free to mess with the styling -->
-	<input type="text" id="videoInput" style="width: 50%; height: 5%"/>
-	<input type="button" id="submitButton" onclick="youtubeDlDownload()" value="Download"/>
+
+
+
+  <ul id="history-table">
+
+  </ul>
+	<!-- This is the loading bar -->
+	<svg width="100%" height="100">
+		<rect id="loadingBar" width="0" height="100" style="fill:rgb(0,200,0);" />
+	</svg>
 	
 	<ul id="history-table">
 		
@@ -87,7 +159,7 @@ function sFunction() {
         // Declare all variables
         var t, tabcnt, tablnks;
         // Get all elements with class="tabcnt" and hide them
-        tabcnt = document.getElementsByClassName("tabcnt");
+        tabcnt = document.getElementsByClassName("tabcnt");macOS DMG background
         for (i = 0; i < tabcnt.length; i++) {
           tabcnt[i].style.display = "none";
         }

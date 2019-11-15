@@ -17,7 +17,7 @@ body {
 
 /* Style the tab */
 .tab {
-  display:grid;
+  display:none;
   grid-gap: 10px 10px;
   grid-template-rows: auto auto auto;
   padding: 10px;
@@ -161,11 +161,10 @@ display: grid;
   background-color: #de4e5a;
 }
 
-.footer{
-  text-align: center;
-    font-size: 15px;
-    color: white; 
-    padding: 1px;
-    margin-left: 431px; 
+.footer {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
 }
 

@@ -10,21 +10,21 @@ html {
 body {
   width: auto;
   height: 500px;
-  background-color: #FFFFF9;
-  background-image: radial-gradient( rgba(255,0,0,0), rgb(255, 32, 32));
+  background-color: #edd5d5;
+  /* background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); */
   border: 5px solid black;
 }
 
 /* Style the tab */
 .tab {
-  display:grid;
+  display:none;
   grid-gap: 10px 10px;
   grid-template-rows: auto auto auto;
   padding: 10px;
   float: left;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
-  width: 30%;
+  width: 25%;
   height: 300px;
   text-align: right;
 }
@@ -73,6 +73,7 @@ body {
 #batchesTab{
   display:none;
 }
+
 #settingsTab{
   display:none;
 }
@@ -156,6 +157,15 @@ display: grid;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
 }
+
 #clearAll:hover{
   background-color: #de4e5a;
+}
+
+.footer {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+}
 

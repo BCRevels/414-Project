@@ -50,7 +50,7 @@
         </datalist>
 
         <p>Download Directory</p>
-        <input type="text" id="downloadDirectory" placeholder="/home/user/Downloads" style="width: 50%; height: 5%"/>
+        <input type="text" id="downloadDirectory" placeholder="/home/user/Videos" style="width: 50%; height: 5%"/>
 
         <p>File Name:</p>
         <input type="text" id="fileName" placeholder="Video1" style="width: 35%; height: 5%"/>
@@ -75,6 +75,8 @@
     <input type="button" id="addToList" onclick="" value="Add to List" />
     <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Downloads" />
     </div>
+	
+	
 
     <datalist id="resolutionFormats">
       <option value="1080p">
@@ -140,19 +142,20 @@ function sFunction() {
 }
 </script>
 
-
-
-  <ul id="history-table">
-
-  </ul>
+	<input type="button" id="dialogButton" onclick="openDialog()" value="Files"/>
 	<!-- This is the loading bar -->
 	<svg width="100%" height="100">
 		<rect id="loadingBar" width="0" height="100" style="fill:rgb(0,200,0);" />
 	</svg>
 	
+	<img src="spinner.gif" id="spinner" width="30" height="30" style="visibility:hidden;">
+	<p id="loadingPercent"></p>
+	
 	<ul id="history-table">
 		
 	</ul>
+	
+	
     <!-- You can also require other files to run in this process -->
     <script>
       function openTab(evt, tabAction) {

@@ -9,13 +9,14 @@ html {
 
 body {
   width: auto;
-  height: 500px;
+  height: 700px;
   background-color: #edd5d5;
   /* background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); */
   border: 5px solid black;
 }
 
 /* Style the tab */
+/* 
 .tab {
   display:none;
   grid-gap: 10px 10px;
@@ -28,16 +29,20 @@ body {
   height: 300px;
   text-align: right;
 }
+*/
 
 /* Style tab links */
+/*
 .Tablinks {
   border: 1px solid rgba(0, 0, 0, 0.8);
   padding: 10px;
   font-size: 30px;
   text-align: center;
 }
+*/
 
 /* Style the buttons that are used to open the tab content */
+/*
 .tab button {
   display: block;
   background-color: inherit;
@@ -50,24 +55,137 @@ body {
   cursor: pointer;
   transition: 0.3s;
 }
+*/
 
 /* Change background color of buttons on hover */
+/*
 .tab button:hover {
   background-color: #de4e5a;
 }
+*/
 
 /* Create an active/current "tab button" class */
+/*
 .tab button.active {
   background-color: #ccc;
 }
+*/
 
 /* Style the tab content */
+/*
 .tabcontent {
   position: absolute;
   padding: 0px 12px;
   border: 1px solid #ccc;
   width: 40%;
   border-left: none;
+}
+*/
+
+/*
+.Tablinks {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+*/
+
+#header1{
+  font-size: 12.5px;
+  font-weight: 800;
+  margin-top: 16px;
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 34%;
+  margin-left: -100px;
+  }
+
+#videoInput{
+  margin-top: 12px;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 30%;
+  margin-left: -100px;
+}
+
+.formats{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 150px 150px 150px; 
+  grid-template-rows: auto auto auto; 
+  grid-gap: 7px;
+  border-radius: 8px;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 37%;
+  margin-left: -100px;
+}
+
+#header2{
+  margin-top: 10px;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 39%;
+  margin-left: -100px;
+}
+
+#downloadDirectory{
+  margin-top: 10px;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 30%;
+  margin-left: -100px;
+}
+
+#header3{
+  margin-top: 18px;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 52%;
+  margin-left: -100px;
+}
+
+#fileName{
+  margin-top: 10px;
+  height: 20px;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 30%;
+  margin-left: -100px;
+}
+
+.container{
+  margin-top: 10px;
+  display: inline-block;
+  position: relative;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0 8px;
+  color: #333;
+  left: 38%;
+  margin-left: -100px;
 }
 
 #batchesTab{
@@ -78,20 +196,17 @@ body {
   display:none;
 }
 
-.Tablinks {
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 10px;
-  font-size: 30px;
-  text-align: center;
-}
 
 #reset {
-display: grid;
- grid-template-columns: 140px 140px; 
+  display: grid;
+  grid-template-columns: 140px 140px; 
   grid-template-rows: 80px 80px; 
   grid-gap: 8px;
   justify-content: center;
   align-items: center;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 8px;
 }
 
 #batches{
@@ -168,4 +283,7 @@ display: grid;
    width: 100%;
    text-align: center;
 }
+
+
+
 

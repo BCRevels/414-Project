@@ -5,6 +5,7 @@ var { spawn } = require('child_process');
 const Storage = require('./storage.js');
 const electron = require('electron').remote;
 var child = require('child_process');
+const elec = require('electron');
 
 //this is the data file for long-term storage
 const storage = new Storage({
@@ -27,15 +28,20 @@ if(histContent.length > 1) {
 alert(histContent);
 */
 
-async function openDialog() {
-	var filePath = await electron.dialog.showOpenDialog({
-		properties:['openDirectory'],
-		filers:[
-			{name:'Log', extensions:['csv', 'log']}
-		]
+function openDialog() {
+	console.log("HI1");
+	var filePath = electron.dialog.showOpenDialogSync({
+			properties:['openDirectory']
+			// filters:[
+			// 		{name:'Log', extensions:['csv', 'log']}
+			// ]
 	});
-	electron.app.setPath('videos', filePath.filePaths[0]);
-	document.getElementById('downloadDirectory').value = filePath.filePaths[0];
+	console.log("HI");
+	console.log(filePath);
+	if(filePath){
+			electron.app.setPath('videos', filePath[0]);
+			document.getElementById('downloadDirectory').value = filePath[0];
+	}
 }
 
 function youtubeDlDownload() {

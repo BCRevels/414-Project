@@ -29,7 +29,7 @@ alert(histContent);
 
 function youtubeDlDownload() {
 	var url = document.getElementById('videoInput').value;
-	var temp = child.spawn('python', ['./youtube-dl', '--no-playlist','\"'+ url + '\"'], {shell: '/bin/sh'});
+	var temp = child.spawn('python', ['./youtube-dl', '--no-playlist', '--prefer-free-formats', '\"'+ url + '\"'], {shell: '/bin/sh'});
 	
 	// exec('python ./youtube-dl --no-playlist ' + url, (error, stdout, stderr) => {
 	// if (error) {

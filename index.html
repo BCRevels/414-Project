@@ -6,6 +6,7 @@
     <title>Video Downloader</title>
 
   </head>
+  
   <body>
 
     <!-- Puts the header as a svg -->
@@ -14,131 +15,108 @@
     <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="520" y="30">Video Downloader</text>
   </svg>
 
-<div class="tab">
+    <div class="tab">
       <button class="Tablinks" onclick="dFunction()">Download</button>
       <button class="Tablinks" onclick="bFunction()">Batches</button>
       <button class="Tablinks" onclick="sFunction()">Settings</button>
     </div>
 
-  <div id="downloadTab" class="tabcnt">
-    <!-- URL desired is put here. Youtube-dl handles the rest.  As long as they have the same type and id, these
-        should be able to be placed anywhere. Feel free to mess with the styling -->
-        <p>URL to Video:</p>
-        <input type="text" id="videoInput" placeholder="https://www.youtube.com/watch" style="width: 50%; height: 5%"/>
+    <!--*******************HERE IS THE DOWNLOAD TAB***********************-->
+    <div id="downloadTab" class="tabcnt">
+      <!-- URL desired is put here. Youtube-dl handles the rest.  As long as they have the same type and id, these
+      should be able to be placed anywhere. Feel free to mess with the styling -->
+      <p>URL to Video:</p>
+      <input type="text" placeholder="https://www.youtube.com/watch" style="width: 50%; height: 5%"/>
+      <input list="resolutionFormats" name="resolution" placeholder="Resolution" style="width:15%; height: 5%">
+      
+      <datalist id="resolutionFormats">
+        <option value="1080p">
+        <option value="720p">
+        <option value="480p">
+        <option value="240p">
+        <input type="button" id="clearAll" onclick="" value="Clear All" />
+      </datalist>
 
-        <p>What to Download:</p>
-        <input type="checkbox"  name="audioWithSound" value="">Audio w/ Sound
-        <input type="checkbox"  name="audioWithSound" value="">Audio Only
-        <input type="checkbox"  name="audioWithSound" value="">Keep Both
+      <p>What to Download:</p>
+      <input type="checkbox"  name="audioWithSound" value="">Video + Audio
+      <input type="checkbox"  name="audioWithSound" value="">Video Only
+      <input type="checkbox"  name="audioWithSound" value="">Audio Only
+      <input type="checkbox"  name="audioWithSound" value="">Both
 
-        <br>
-        <!-- drop down list for video formats-->
-        <input list="videoFormats" name="videoFormat" placeholder="Video Format">
-        <datalist id="videoFormats">
-          <option value="webm">
-          <option value="mkv">
-          <option value="mp4">
-        </datalist>
+      <br>
+      <!-- drop down list for video formats-->
+      <input list="videoFormats" name="videoFormat" placeholder="Video Format">
+      <datalist id="videoFormats">
+        <option value="webm">
+        <option value="mkv">
+        <option value="mp4">
+      </datalist>
 
-        <!-- drop down list for audio formats-->
-        <input list="audioFormats" name="audioFormat" placeholder="Audio Format">
-        <datalist id="audioFormats">
-          <option value="mp3">
-          <option value="m4a">
-          <option value="wav">
-          <option value="flac">
-        </datalist>
+      <!-- drop down list for audio formats-->
+      <input list="audioFormats" name="audioFormat" placeholder="Audio Format">
+      <datalist id="audioFormats">
+        <option value="mp3">
+        <option value="m4a">
+        <option value="wav">
+        <option value="flac">
+      </datalist>
 
-        <p>Download Directory</p>
-        <input type="text" id="downloadDirectory" placeholder="/home/user/Downloads" style="width: 50%; height: 5%"/>
+      <p>File Name:</p>
+      <input type="text" id="fileName" placeholder="Video1" style="width: 35%; height: 5%"/>
+      <input type="checkbox"  name="defaultValues" value="">Use Default
+      <br>
 
-        <p>File Name:</p>
-        <input type="text" id="fileName" placeholder="Video1" style="width: 35%; height: 5%"/>
-        <input type="checkbox"  name="defaultValues" value="">Use Default
-        <br>
-
-        <div id = "reset">
+      <div id = "reset">
         <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Download" />
         <input type="button" id="resetField" onclick="" value="Reset Field" />
-        </div>
+      </div>
     </div>
 
-    <div id="batchesTab" class="tabcnt">
-    <p>Download Directory:</p>
-    <input type="text" placeholder="/home/user/Downloads" style="width: 50%; height: 5%"/>
-
-    <p>URL to Video:</p>
-    <input type="text" placeholder="https://www.youtube.com/watch" style="width: 50%; height: 5%"/>
-    <input list="resolutionFormats" name="resolution" placeholder="Resolution" style="width:15%; height: 5%">
+    <!--***************HERE IS THE SETTINGS TAB***************-->
+    <div id="settingsTab" class="tabcnt">
+      <div>
+        <p>Download Directory:</p>
+        <input type="text" placeholder="/home/user/Downloads" style="width: 50%; height: 5%"/>
+      </div>
+      <br>
+      <input list="audioFormats" name="audioFormat" placeholder="Audio Format">
+      <datalist id="audioFormats">
+        <option value="mp3">
+        <option value="m4a">
+        <option value="wav">
+        <option value="flac">
+      </datalist>
     
-    <div id="batches">
-    <input type="button" id="addToList" onclick="" value="Add to List" />
-    <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Downloads" />
-    </div>
-
-    <datalist id="resolutionFormats">
-      <option value="1080p">
-      <option value="720p">
-      <option value="480p">
-      <option value="240p">
-    <input type="button" id="clearAll" onclick="" value="Clear All" />
-    </datalist>
-    </div>
-
-  <div id="settingsTab" class="tabcnt">
-    <input list="audioFormats" name="audioFormat" placeholder="Audio Format">
-        <datalist id="audioFormats">
-          <option value="mp3">
-          <option value="m4a">
-          <option value="wav">
-          <option value="flac">
-        </datalist>
-    
-    <input list="videoFormats" name="videoFormat" placeholder="Video Format">
-        <datalist id="videoFormats">
-          <option value="webm">
-          <option value="mkv">
-          <option value="mp4">
-        </datalist>
-    <div id="settings">
+      <input list="videoFormats" name="videoFormat" placeholder="Video Format">
+      <datalist id="videoFormats">
+        <option value="webm">
+        <option value="mkv">
+        <option value="mp4">
+      </datalist>
+    <!-- <div id="settings">  EITHER WILL MOVE OR REMOVE LATER
       <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Downloads" />
       <input type="button" id="clearAll" onclick="" value="Clear All" />
-    </div>
+    </div> -->
   </div>
 
-<!-- The content are shown when the buttons are clicked -->
-<script>
-function dFunction() {
-  var x = document.getElementById("downloadTab");
-  var y = document.getElementById("batchesTab");
-  var z = document.getElementById("settingsTab");
-  x.style.display = "block";
-  y.style.display = "none";
-  z.style.display = "none";
-}
-</script>
+  <!-- The content are shown when the buttons are clicked -->
+  <script>
+    function dFunction() {
+      var x = document.getElementById("downloadTab");
+      var z = document.getElementById("settingsTab");
+      x.style.display = "block";
+      z.style.display = "none";
+    }
+  </script>
 
-<script>
-function bFunction() {
-  var x = document.getElementById("downloadTab");
-  var y = document.getElementById("batchesTab");
-  var z = document.getElementById("settingsTab");
-  x.style.display = "none";
-  y.style.display = "block";
-  z.style.display = "none";
-}
-</script>
-
-<script>
-function sFunction() {
-  var x = document.getElementById("downloadTab");
-  var y = document.getElementById("batchesTab");
-  var z = document.getElementById("settingsTab");
-  x.style.display = "none";
-  y.style.display = "none";
-  z.style.display = "block";
-}
-</script>
+  <script>
+    function sFunction() {
+      var x = document.getElementById("downloadTab");
+      var z = document.getElementById("settingsTab");
+      x.style.display = "none";
+      z.style.display = "block";
+    }
+  </script>
 
 
 

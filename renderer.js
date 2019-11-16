@@ -29,13 +29,13 @@ alert(histContent);
 
 function youtubeDlDownload() {
 	var url = document.getElementById('videoInput').value;
-	var temp = child.spawn('cmd.exe', ['/c', 'runYoutubeDl.bat \"' + url + '\"'], {shell: true});
+	var temp = child.spawn('python', ['./youtube-dl', '--no-playlist','\"'+ url + '\"'], {shell: '/bin/sh'});
 	
-	exec('python ./youtube-dl --no-playlist ' + url, (error, stdout, stderr) => {
-	if (error) {
-		alert(`exec error: ${error}`);
-		return;
-	}
+	// exec('python ./youtube-dl --no-playlist ' + url, (error, stdout, stderr) => {
+	// if (error) {
+	// 	alert(`exec error: ${error}`);
+	// 	return;
+	// }
 	//this info is good for the loading bar
 	temp.stdout.on('data', (data) => {
 	    var regex = new RegExp(']\\s+[0-9]+\.?[0-9]+');	//regular expression for getting percentage done

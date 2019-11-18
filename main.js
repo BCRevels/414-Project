@@ -13,7 +13,6 @@ const storage = new Storage({
 	configName: 'youtubedl-gui-local-data',
 	defaults: {
 		windowBounds: { width: 1000, height: 600},
-		downloadDirectory: app.getPath('home') + "\\Downloads",
 		history: new Array("null")
 	}
 });

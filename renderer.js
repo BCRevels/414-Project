@@ -31,6 +31,7 @@ async function openDialog() {
 //lists the history by appending them to a list.
 function listHistory() {
 	var histList = document.getElementById('history-table');
+	histList.style.visibility = 'visible';
 	let histContent = storage.get('history');
 	
 	if(histContent.length > 1) {

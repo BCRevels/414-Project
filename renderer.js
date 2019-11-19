@@ -5,11 +5,15 @@ var { spawn } = require('child_process');
 const Storage = require('./storage.js');
 const electron = require('electron').remote;
 var child = require('child_process');
+const fs = require('fs');
 
 //this is the data file for long-term storage
 const storage = new Storage({
 	configName: 'youtubedl-gui-local-data'
 });
+
+//set text of download directory
+document.getElementById('downloadDirectory').value = storage.get('dlDirectory');
 
 async function openDialog() {
 	var filePath = await electron.dialog.showOpenDialog({
@@ -19,8 +23,8 @@ async function openDialog() {
 		]
 	});
 	if(filePath){
-		electron.app.setPath('videos', filePath.filePaths[0]);
-		document.getElementById('downloadDirectory').value = filePath.filePaths[0];
+		storage.set('dlDirectory', filePath.filePaths[0]);
+		document.getElementById('downloadDirectory').value = storage.get('dlDirectory');
 	}
 }
 
@@ -30,7 +34,6 @@ function listHistory() {
 	let histContent = storage.get('history');
 	
 	if(histContent.length > 1) {
-		histContent = histContent.slice(1);
 		for(var i = 0; i < histContent.length; i++) {
 			let row = histList.insertRow(i+1);
 			let title = row.insertCell(0);
@@ -47,20 +50,33 @@ function deleteHistory() {
 }
 
 function youtubeDlDownload() {
+	//check if download directory exists
+	if(!fs.existsSync(storage.get('dlDirectory'))) {
+		alert("Download directory does not exist");
+		return 0;
+	}
+	
 	//make spinner and loading percentage visible
 	document.getElementById('spinner').style.visibility = 'visible';
 	document.getElementById('loadingPercent').innerHTML = '0%';
+	var newDownload = true;
 	
 	//get input and build values for sending to 
 	var dlRegex = new RegExp('[\\\/\=\:\.]', 'g');
 	var url = document.getElementById('videoInput').value;
 	var title = url;
-	dlPath = electron.app.getPath('videos') + '\\\%(title)s.mp4';
-	//youtube-dl -o 'C:\Users\User\Downloads\%(title)s.%(ext)s' www.youtube.com/video
-	var newDownload = true;
+	dlPath = storage.get('dlDirectory') + '\\\%(title)s.%(ext)s';
+	
+	//get video format
+	var videoFormat = "";
+	var videoFormatSelect = document.getElementById('videoFormat');
+	if(videoFormatSelect.value)
+		videoFormat = '--recode-video ' + videoFormatSelect.value;
+	else
+		videoFormat = '--recode-video ' + 'mp4';
 	
 	//start video download
-	var temp = child.spawn('cmd.exe', ['/c', 'runYoutubeDl.bat \"' + dlPath + '\" \"' + url + '\"'], {shell: true});
+	var temp = child.spawn('cmd.exe', ['/c', 'runYoutubeDl.bat \"' + dlPath + '\" ' + videoFormat + ' \"' + url + '\"'], {shell: true});
 	
 	//////child events//////
 	
@@ -68,7 +84,7 @@ function youtubeDlDownload() {
 	temp.stdout.on('data', (data) => {
 		console.log("DATA: " + data);
 		if(data.toString().match(/\[download\] Destination:/)) {
-			title = data.toString().slice(25 + electron.app.getPath('videos').length, data.toString().length-1);
+			title = data.toString().slice(25 + storage.get('dlDirectory').length, data.toString().length-1);
 			console.log(title);
 		}
 		if(data.toString().match(/has already been downloaded/))
@@ -85,29 +101,34 @@ function youtubeDlDownload() {
 		}
 	});
 	
+	//error message
 	temp.stderr.on('data', (data) => {
 		console.log(data.toString());
-		document.getElementById('loadingBar').style.width = 0;
-		document.getElementById('loadingPercent').value = "";
+		alert(data.toString());
 	});
 
+	//Closes the download
 	temp.on('exit', (code) => {
+		console.log("Exit Code: " + code);
 		document.getElementById('loadingBar').style.width = 0;
 		document.getElementById('loadingPercent').innerHTML = "";
 		
 		if(newDownload){
-			//add to history
-			historyObject = {
-				Title:title,
-				Location:dlPath.slice(0, dlPath.length-13) + title,
-				Time:new Date().toLocaleString()
+			if(code == 0) {
+				//add to history
+				historyObject = {
+					Title:title,
+					Location:dlPath.slice(0, dlPath.length-13) + title,
+					Time:new Date().toLocaleString()
+				}
+				console.log(historyObject);
+				let his = storage.get('history');                			 //get history array from storage file
+				his.push(historyObject);                                	 //push the url on the history array
+				storage.set('history', his);
+				console.log("Finished Downloading");
 			}
-			console.log(historyObject);
-			let his = storage.get('history');                			 //get history array from storage file
-			his.push(historyObject);                                	 //push the url on the history array
-			storage.set('history', his);
-			console.log("Finished Downloading");
-			
+			else
+				alert("An error occurred while downloading the video");
 		}
 		else
 			alert("Video has already been downloaded in this directory");

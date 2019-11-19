@@ -3,6 +3,7 @@ const {app, BrowserWindow, electron} = require('electron')
 const path = require('path')
 const Storage = require('./storage.js')
 
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -13,7 +14,8 @@ const storage = new Storage({
 	configName: 'youtubedl-gui-local-data',
 	defaults: {
 		windowBounds: { width: 1000, height: 600},
-		history: new Array("null")
+		dlDirectory: app.getPath('videos'),
+		history: new Array()
 	}
 });
 

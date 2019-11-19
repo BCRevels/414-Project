@@ -33,8 +33,8 @@
 
         <br>
         <!-- drop down list for video formats-->
-        <input list="videoFormats" name="videoFormat" placeholder="Video Format">
-        <datalist id="videoFormats">
+        <input id="videoFormat" list="videoFormats" name="videoFormat" placeholder="Video Format">
+        <datalist>
           <option value="webm">
           <option value="mkv">
           <option value="mp4">
@@ -50,7 +50,7 @@
         </datalist>
 
         <p>Download Directory</p>
-        <input type="text" id="downloadDirectory" placeholder="/home/user/Videos" style="width: 50%; height: 5%"/>
+        <input type="text" id="downloadDirectory" placeholder="/home/user/Videos" readonly style="width: 50%; height: 5%"/>
 
         <p>File Name:</p>
         <input type="text" id="fileName" placeholder="Video1" style="width: 35%; height: 5%"/>
@@ -96,7 +96,7 @@
           <option value="flac">
         </datalist>
     
-    <input list="videoFormats" name="videoFormat" placeholder="Video Format">
+    <input id="videoFormat" list="videoFormats" name="videoFormat" placeholder="Video Format">
         <datalist id="videoFormats">
           <option value="webm">
           <option value="mkv">

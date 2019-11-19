@@ -27,9 +27,10 @@
         <input type="text" id="videoInput" placeholder="https://www.youtube.com/watch" style="width: 50%; height: 5%"/>
 
         <p>What to Download:</p>
-        <input type="checkbox"  name="audioWithSound" value="">Audio w/ Sound
-        <input type="checkbox"  name="audioWithSound" value="">Audio Only
-        <input type="checkbox"  name="audioWithSound" value="">Keep Both
+        <input type="radio" name = "radioButtons" id="vpacbutton" value = "">Video + Audio (Combined)
+        <input type="radio" name = "radioButtons" id="vpasbutton" value = "">Video + Audio (Separate)
+        <input type="radio" name = "radioButtons" id="vobutton" value = "">Video Only
+        <input type="radio" name = "radioButtons" id="aobutton" value = "">Audio Only
 
         <br>
         <!-- drop down list for video formats-->
@@ -154,7 +155,6 @@ function sFunction() {
 	<ul id="history-table">
 		
 	</ul>
-	
 	
     <!-- You can also require other files to run in this process -->
     <script>

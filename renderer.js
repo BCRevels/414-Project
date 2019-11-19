@@ -12,36 +12,39 @@ const storage = new Storage({
 	configName: 'youtubedl-gui-local-data'
 });
 
-//I tried to get html to display all of the user's current history. I can't manage to get it to work
-//	though. Let me know if you figure something out
-/*
-var histList = document.getElementById('history-table');
-let histContent = store.get('history');
-if(histContent.length > 1) {
-	histContent = histContent.slice(1);
-	for(int i = 0; i < histContent.length; i++) {
-		let histItem = document.createElement("li");
-		histItem.appendChild(document.createTextNode(histContent[i]));
-		histList.appendChild(histItem);
+async function openDialog() {
+	var filePath = await electron.dialog.showOpenDialog({
+		properties:['openDirectory'],
+		filers:[
+			{name:'Log', extensions:['csv', 'log']}
+		]
+	});
+	if(filePath){
+		electron.app.setPath('videos', filePath.filePaths[0]);
+		document.getElementById('downloadDirectory').value = filePath.filePaths[0];
 	}
 }
-alert(histContent);
-*/
 
-function openDialog() {
-	console.log("HI1");
-	var filePath = electron.dialog.showOpenDialogSync({
-			properties:['openDirectory']
-			// filters:[
-			// 		{name:'Log', extensions:['csv', 'log']}
-			// ]
-	});
-	console.log("HI");
-	console.log(filePath);
-	if(filePath){
-			electron.app.setPath('videos', filePath[0]);
-			document.getElementById('downloadDirectory').value = filePath[0];
+//lists the history by appending them to a list.
+function listHistory() {
+	var histList = document.getElementById('history-table');
+	let histContent = storage.get('history');
+	
+	if(histContent.length > 1) {
+		histContent = histContent.slice(1);
+		for(var i = 0; i < histContent.length; i++) {
+			let row = histList.insertRow(i+1);
+			let title = row.insertCell(0);
+			let time = row.insertCell(1);
+			title.innerHTML = histContent[i].Title;
+			time.innerHTML = histContent[i].Time;
+		}
 	}
+	console.log(histContent);
+}
+
+function deleteHistory() {
+	storage.set('history', new Array());
 }
 
 function youtubeDlDownload() {
@@ -52,8 +55,10 @@ function youtubeDlDownload() {
 	//get input and build values for sending to 
 	var dlRegex = new RegExp('[\\\/\=\:\.]', 'g');
 	var url = document.getElementById('videoInput').value;
+	var title = url;
 	dlPath = electron.app.getPath('videos') + '\\\%(title)s.mp4';
 	//youtube-dl -o 'C:\Users\User\Downloads\%(title)s.%(ext)s' www.youtube.com/video
+	var newDownload = true;
 	
 	//start video download
 	var temp = child.spawn('cmd.exe', ['/c', 'runYoutubeDl.bat \"' + dlPath + '\" \"' + url + '\"'], {shell: true});
@@ -63,14 +68,21 @@ function youtubeDlDownload() {
 	//this info is good for the loading bar and percent tracker
 	temp.stdout.on('data', (data) => {
 		console.log("DATA: " + data);
+		if(data.toString().match(/\[download\] Destination:/)) {
+			title = data.toString().slice(25 + electron.app.getPath('videos').length, data.toString().length-1);
+			console.log(title);
+		}
+		if(data.toString().match(/has already been downloaded/))
+			newDownload = false;
+			
 	    var regex = new RegExp(']\\s+[0-9]+\.?[0-9]+');	//regular expression for getting percentage done
 		var dlpercent = data.toString().match(regex);			//get percentage done
 		if(dlpercent) {
-		dlpercent = dlpercent[dlpercent.length-1];				
-		dlpercent = dlpercent.slice(2, dlpercent.length);		
-		dlpercent = parseFloat(dlpercent);							//change from string to float
-		document.getElementById('loadingBar').style.width = dlpercent + '%';				//update loading bar
-		document.getElementById('loadingPercent').innerHTML = dlpercent + '%';
+			dlpercent = dlpercent[dlpercent.length-1];				
+			dlpercent = dlpercent.slice(2, dlpercent.length);		
+			dlpercent = parseFloat(dlpercent);													//change from string to float
+			document.getElementById('loadingBar').style.width = dlpercent + '%';				//update loading bar
+			document.getElementById('loadingPercent').innerHTML = dlpercent + '%';
 		}
 	});
 	
@@ -84,11 +96,22 @@ function youtubeDlDownload() {
 		document.getElementById('loadingBar').style.width = 0;
 		document.getElementById('loadingPercent').innerHTML = "";
 		
-		//add to history
-		let his = storage.get('history');                //get history array from storage file
-		his.push(url);                                	 //push the url on the history array
-		storage.set('history', his);
-		console.log("Finished Downloading");
+		if(newDownload){
+			//add to history
+			historyObject = {
+				Title:title,
+				Location:dlPath.slice(0, dlPath.length-13) + title,
+				Time:new Date().toLocaleString()
+			}
+			console.log(historyObject);
+			let his = storage.get('history');                			 //get history array from storage file
+			his.push(historyObject);                                	 //push the url on the history array
+			storage.set('history', his);
+			console.log("Finished Downloading");
+			
+		}
+		else
+			alert("Video has already been downloaded in this directory");
 		document.getElementById('spinner').style.visibility = 'hidden';
 	});
 }

@@ -9,34 +9,40 @@ html {
 
 body {
   width: auto;
-  height: 500px;
-  background-color: #FFFFF9;
-  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+  height: 700px;
+  background-color: #edd5d5;
+  /* background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); */
   border: 5px solid black;
 }
 
 /* Style the tab */
+/* 
 .tab {
-  display:grid;
+  display:none;
   grid-gap: 10px 10px;
   grid-template-rows: auto auto auto;
   padding: 10px;
   float: left;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
-  width: 30%;
+  width: 25%;
   height: 300px;
+  text-align: right;
 }
+*/
 
 /* Style tab links */
+/*
 .Tablinks {
   border: 1px solid rgba(0, 0, 0, 0.8);
   padding: 10px;
   font-size: 30px;
   text-align: center;
 }
+*/
 
 /* Style the buttons that are used to open the tab content */
+/*
 .tab button {
   display: block;
   background-color: inherit;
@@ -49,18 +55,24 @@ body {
   cursor: pointer;
   transition: 0.3s;
 }
+*/
 
 /* Change background color of buttons on hover */
+/*
 .tab button:hover {
-  background-color: #ddd;
+  background-color: #de4e5a;
 }
+*/
 
 /* Create an active/current "tab button" class */
+/*
 .tab button.active {
   background-color: #ccc;
 }
+*/
 
 /* Style the tab content */
+/*
 .tabcontent {
   position: absolute;
   padding: 0px 12px;
@@ -68,20 +80,210 @@ body {
   width: 40%;
   border-left: none;
 }
+*/
 
-#downloadTab{
-  display:none;
-}
-#batchesTab{
-  display:none;
-}
-#settingsTab{
-  display:none;
-}
-
+/*
 .Tablinks {
   border: 1px solid rgba(0, 0, 0, 0.8);
   padding: 10px;
   font-size: 30px;
   text-align: center;
 }
+*/
+
+#header1{
+  font-size: 12.5px;
+  font-weight: 800;
+  margin-top: 16px;
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 34%;
+  margin-left: -100px;
+  }
+
+#videoInput{
+  margin-top: 12px;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 30%;
+  margin-left: -100px;
+}
+
+.formats{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 150px 150px 150px; 
+  grid-template-rows: auto auto auto; 
+  grid-gap: 7px;
+  border-radius: 8px;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 37%;
+  margin-left: -100px;
+}
+
+#header2{
+  margin-top: 10px;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 39%;
+  margin-left: -100px;
+}
+
+#downloadDirectory{
+  margin-top: 10px;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 30%;
+  margin-left: -100px;
+}
+
+#header3{
+  margin-top: 18px;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 52%;
+  margin-left: -100px;
+}
+
+#fileName{
+  margin-top: 10px;
+  height: 20px;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 30%;
+  margin-left: -100px;
+}
+
+.container{
+  margin-top: 10px;
+  display: inline-block;
+  position: relative;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0 8px;
+  color: #333;
+  left: 38%;
+  margin-left: -100px;
+}
+
+#batchesTab{
+  display:none;
+}
+
+#settingsTab{
+  display:none;
+}
+
+
+#reset {
+  display: grid;
+  grid-template-columns: 140px 140px; 
+  grid-template-rows: 80px 80px; 
+  grid-gap: 8px;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 8px;
+}
+
+#batches{
+display: grid;
+ grid-template-columns: 140px 140px; 
+  grid-template-rows: 80px 80px; 
+  grid-gap: 8px;
+  justify-content: left;
+  align-items: center;
+}
+
+#settings{
+  display: grid;
+ grid-template-columns: 140px 140px; 
+  grid-template-rows: 80px 80px; 
+  grid-gap: 20px;
+  justify-content: left;
+  align-items: center;
+}
+
+/* Customized buttons */
+#resetField{
+  background-color: #e7e7e7; color: black;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+#resetField:hover{
+  background-color: #de4e5a;
+}
+
+#addToList{
+  background-color: #e7e7e7; color: black;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+#addToList:hover{
+  background-color: #de4e5a;
+}
+
+#startDownload{
+  background-color: #e7e7e7; color: black;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+#startDownload:hover{
+  background-color: #de4e5a;
+}
+
+#clearAll{
+  background-color: #e7e7e7; color: black;
+  font-size: 12px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+
+#clearAll:hover{
+  background-color: #de4e5a;
+}
+
+.footer {
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+}
+
+
+
+

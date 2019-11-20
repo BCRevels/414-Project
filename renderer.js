@@ -57,27 +57,35 @@ function youtubeDlDownload() {
 		return 0;
 	}
 	
+	//get file name
+	if(document.getElementById('defaultCheck').checked)
+		dlPath = storage.get('dlDirectory') + '\\\%(title)s.%(ext)s';
+	else {
+		var fileName = document.getElementById('fileName').value;
+		var reg = new RegExp('[^\\s\\-a-zA-Z0-9\\_\\$\\#\\~\\!\\@\\%\\^\\&\\(\\)\\\']');
+		console.log(fileName.match(reg));
+		if(fileName.match(reg)) {
+			alert(fileName + ' is not a valid file name');
+			return;
+		}
+		dlPath = storage.get('dlDirectory') + '\\' + document.getElementById('fileName').value + '.%(ext)s';
+	}
+	
 	//make spinner and loading percentage visible
 	document.getElementById('spinner').style.visibility = 'visible';
 	document.getElementById('loadingPercent').innerHTML = '0%';
 	var newDownload = true;
 	
 	//get input and build values for sending to 
-	var dlRegex = new RegExp('[\\\/\=\:\.]', 'g');
+	//var dlRegex = new RegExp('[\\\/\=\:\.]', 'g');
 	var url = document.getElementById('videoInput').value;
 	var title = url;
-	dlPath = storage.get('dlDirectory') + '\\\%(title)s.%(ext)s';
 	
-	//get video format
-	var videoFormat = "";
-	var videoFormatSelect = document.getElementById('videoFormat');
-	if(videoFormatSelect.value)
-		videoFormat = '--recode-video ' + videoFormatSelect.value;
-	else
-		videoFormat = '--recode-video ' + 'mp4';
+	
+	
 	
 	//start video download
-	var temp = child.spawn('cmd.exe', ['/c', 'runYoutubeDl.bat \"' + dlPath + '\" ' + videoFormat + ' \"' + url + '\"'], {shell: true});
+	var temp = child.spawn('cmd.exe', ['/c', 'runYoutubeDl.bat \"' + dlPath + '\" ' + ' \"' + url + '\"'], {shell: true});
 	
 	//////child events//////
 	

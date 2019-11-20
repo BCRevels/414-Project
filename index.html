@@ -9,12 +9,14 @@
   <body>
 
     <!-- Puts the header as a svg -->
-  <svg height="40" width="2000">
-    <rect width="1325" height="80" background="#FFFFF9" style="fill:rgb(0,0,0);stroke-width:8;stroke:rgb(0,0,0)" />
-    <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="520" y="30">Video Downloader</text>
+  <svg width="100%" height="10%">
+    <rect width="100%" height="100%" background="#FFFFF9" style="fill:rgb(0,0,0);stroke-width:8;stroke:rgb(0,0,0)" />
+    <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="40%" y="50%">Video Downloader</text>
   </svg>
 
-<div class="tab">
+
+<!--Hides the tab-->
+<div class="tab" style="display:none">
       <button class="Tablinks" onclick="dFunction()">Download</button>
       <button class="Tablinks" onclick="bFunction()">Batches</button>
       <button class="Tablinks" onclick="sFunction()">Settings</button>
@@ -23,25 +25,29 @@
   <div id="downloadTab" class="tabcnt">
     <!-- URL desired is put here. Youtube-dl handles the rest.  As long as they have the same type and id, these
         should be able to be placed anywhere. Feel free to mess with the styling -->
-        <p>URL to Video:</p>
-        <input type="text" id="videoInput" placeholder="https://www.youtube.com/watch" style="width: 50%; height: 5%"/>
 
+      <p id="header1"> Paste Video Links to download high quality videos with our video downloader</p>
+      <div class="link1">
+        <input type="text" id="videoInput" placeholder="Paste link here.. e.g. https://www.youtube.com/watch?v=9vuqI2v2IRs" style="width: 55%; height: 7%; padding: 10px 24px; border-radius: 4px;"/>
+      </div>
         <p>What to Download:</p>
-        <input type="checkbox"  name="audioWithSound" value="">Audio w/ Sound
-        <input type="checkbox"  name="audioWithSound" value="">Audio Only
-        <input type="checkbox"  name="audioWithSound" value="">Keep Both
+        <input type="radio" name = "radioButtons" id="vpacbutton" value = "">Video + Audio (Combined)
+        <input type="radio" name = "radioButtons" id="vpasbutton" value = "">Video + Audio (Separate)
+        <input type="radio" name = "radioButtons" id="vobutton" value = "">Video Only
+        <input type="radio" name = "radioButtons" id="aobutton" value = "">Audio Only
 
         <br>
+      <div class="formats">
         <!-- drop down list for video formats-->
-        <input id="videoFormat" list="videoFormats" name="videoFormat" placeholder="Video Format">
-        <datalist>
+        <input list="videoFormats" name="videoFormat" placeholder="Video Format" style=" border-radius: 4px;"/>
+        <datalist id="videoFormats">
           <option value="webm">
           <option value="mkv">
           <option value="mp4">
-        </datalist>
+       </datalist>
 
         <!-- drop down list for audio formats-->
-        <input list="audioFormats" name="audioFormat" placeholder="Audio Format">
+        <input list="audioFormats" name="audioFormat" placeholder="Audio Format" style=" border-radius: 4px;"/>
         <datalist id="audioFormats">
           <option value="mp3">
           <option value="m4a">
@@ -49,12 +55,30 @@
           <option value="flac">
         </datalist>
 
-        <p>Download Directory</p>
-        <input type="text" id="downloadDirectory" placeholder="/home/user/Videos" readonly style="width: 50%; height: 5%"/>
+        <!-- drop down list for download types-->
+        <input list="downloadType" name="downloadType" placeholder="Download Type" style=" border-radius: 4px;"/>
+        <datalist id="downloadType">
+          <option value="Video w/ Sound">
+          <option value="Audio Only">
+          <option value="Keep Both">
+        </datalist>
+      </div>
 
-        <p>File Name:</p>
-        <input type="text" id="fileName" placeholder="Video1" style="width: 35%; height: 5%"/>
-        <input type="checkbox"  name="defaultValues" value="">Use Default
+
+        <p id="header2">Select the directory you want to download your files to</p>
+        <div class="link2">
+          <input type="text" id="downloadDirectory" placeholder="/home/user/Downloads" style="width: 55%; height: 5%; 
+          padding: 10px 24px; border-radius: 4px;"/>
+        </div>
+
+        <p id="header3">File Name:</p>
+        <div class="link3">
+          <input type="text" id="fileName" placeholder="Video1" style="width: 45%; height: 10% padding: 10px 24px; border-radius: 4px;"/>
+          <label class="container">Use Default
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+          </label>
+        </div>
         <br>
 
         <div id = "reset">
@@ -135,7 +159,8 @@ function sFunction() {
 	<!-- This is the loading bar -->
 	<svg width="100%" height="100">
 		<rect id="loadingBar" width="0" height="100" style="fill:rgb(0,200,0);" />
-	</svg>
+  </svg>
+
 	
 	<img src="spinner.gif" id="spinner" width="30" height="30" style="visibility:hidden;">
 	<p id="loadingPercent"></p>

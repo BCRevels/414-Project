@@ -8,12 +8,13 @@ html {
 }
 
 body {
-  width: auto;
+  width: 1000px;
   height: 700px;
   background-color: #edd5d5;
   /* background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); */
   border: 5px solid black;
 }
+
 
 /* Style the tab */
 /* 
@@ -91,6 +92,10 @@ body {
 }
 */
 
+.tabcnt{
+  margin: 0 auto;
+}
+
 #header1{
   font-size: 12.5px;
   font-weight: 800;
@@ -100,8 +105,21 @@ body {
   position: relative;
   padding: 0 8px;
   color: #333;
-  left: 34%;
-  margin-left: -100px;
+  left: 20%;
+  margin-left: -25px;
+  }
+
+#header3{
+  font-size: 12.5px;
+  font-weight: 800;
+  margin-top: 16px;
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 20%;
+  margin-left: -150px;
   }
 
 #videoInput{
@@ -138,7 +156,7 @@ body {
   padding: 0 8px;
   color: #333;
   left: 39%;
-  margin-left: -100px;
+  margin-left: -130px;
 }
 
 #downloadDirectory{
@@ -162,6 +180,19 @@ body {
   color: #333;
   left: 52%;
   margin-left: -100px;
+}
+
+#header4{
+  margin-top: 18px;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+  padding: 0 8px;
+  color: #333;
+  left: 52%;
+  margin-left: -70px;
 }
 
 #fileName{

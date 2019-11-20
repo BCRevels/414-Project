@@ -10,8 +10,8 @@
 
     <!-- Puts the header as a svg -->
   <svg width="100%" height="10%">
-    <rect width="100%" height="100%" background="#FFFFF9" style="fill:rgb(0,0,0);stroke-width:8;stroke:rgb(0,0,0)" />
-    <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="40%" y="50%">Video Downloader</text>
+    <rect width="100%" height="80%" background="#FFFFF9" style="fill:rgb(0,0,0);stroke-width:8;stroke:rgb(0,0,0)" />
+    <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="41%" y="50%">Video Downloader</text>
   </svg>
 
   <div id="downloadTab" style="text-align:left" class="tabcnt">
@@ -63,6 +63,77 @@
         </div>
     </div>
 
+    <div class="link4">
+      <p id="header4">Your No.1 Video Downloader</p>
+        <p id="text"> Download your favourite videos form various websites to various formats using our Video Downloader. Download in these formats: MP3, M4A, WAV, FLAC, MP4, MKV, WEBM. Our premium Video Downloader offers high speed downloads from a wide range of websites like Youtube, Facebook, Twitter and many more!
+    </div>
+
+
+    <div id="batchesTab" class="tabcnt">
+    <p>Download Directory:</p>
+    <input type="text" placeholder="/home/user/Downloads" style="width: 50%; height: 5%"/>
+
+    <p>URL to Video:</p>
+    <input type="text" placeholder="https://www.youtube.com/watch" style="width: 50%; height: 5%"/>
+    <input list="resolutionFormats" name="resolution" placeholder="Resolution" style="width:15%; height: 5%">
+    
+    <div id="batches">
+    <input type="button" id="addToList" onclick="" value="Add to List" />
+    <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Downloads" />
+    </div>
+	
+	
+
+    <datalist id="resolutionFormats">
+      <option value="1080p">
+      <option value="720p">
+      <option value="480p">
+      <option value="240p">
+    <input type="button" id="clearAll" onclick="" value="Clear All" />
+    </datalist>
+    </div>
+
+  <div id="settingsTab" class="tabcnt">
+    <div id="settings">
+      <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Downloads" />
+      <input type="button" id="clearAll" onclick="" value="Clear All" />
+    </div>
+  </div>
+ 
+<!-- The content are shown when the buttons are clicked -->
+<script>
+function dFunction() {
+  var x = document.getElementById("downloadTab");
+  var y = document.getElementById("batchesTab");
+  var z = document.getElementById("settingsTab");
+  x.style.display = "block";
+  y.style.display = "none";
+  z.style.display = "none";
+}
+</script>
+
+<script>
+function bFunction() {
+  var x = document.getElementById("downloadTab");
+  var y = document.getElementById("batchesTab");
+  var z = document.getElementById("settingsTab");
+  x.style.display = "none";
+  y.style.display = "block";
+  z.style.display = "none";
+}
+</script>
+
+<script>
+function sFunction() {
+  var x = document.getElementById("downloadTab");
+  var y = document.getElementById("batchesTab");
+  var z = document.getElementById("settingsTab");
+  x.style.display = "none";
+  y.style.display = "none";
+  z.style.display = "block";
+}
+</script>
+
 	<input type="button" id="dialogButton" onclick="openDialog()" value="Files"/>
 	<input type="button" id="historyButton" onClick="listHistory()" value="History"/>
 	<input type="button" id="deleteHistory" onClick="deleteHistory()" value="Delete History"/>
@@ -109,8 +180,13 @@
     <script src="./renderer.js"></script>
 <!-- 
 <div class="footer">
+<<<<<<< Updated upstream
   <p>&copy; 2019 Video Downloader</p>
 </div> -->
+=======
+  <p>Copyright 2019 © Video Downloader. All Rights Reserved</p>
+</div>
+>>>>>>> Stashed changes
 <style>
 
 </style>

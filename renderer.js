@@ -13,23 +13,16 @@ const storage = new Storage({
 });
 
 //set text of download directory
-document.getElementById('downloadDirectory').value = storage.get('dlDirectory');
-
-function openDialog() {
-	var filePath = electron.dialog.showOpenDialogSync({
-		properties:['openDirectory']
-	});
-	if(filePath){
-		storage.set('dlDirectory', filePath[0]);
-		document.getElementById('downloadDirectory').value = storage.get('dlDirectory');
-	}
-}
-
-//lists the history by appending them to a list.
-function listHistory() {
-	var histList = document.getElementById('history-table');
+function initialize() {
+	console.log("Initializing");
+	//set download directory to default
+	document.getElementById('downloadDirectory').value = storage.get('dlDirectory');
+	
+	//build history table
+	var histList = document.getElementById('historyTable');
 	histList.style.visibility = 'visible';
 	let histContent = storage.get('history');
+	histContent.reverse();
 	
 	if(histContent.length > 1) {
 		for(var i = 0; i < histContent.length; i++) {
@@ -41,12 +34,25 @@ function listHistory() {
 		}
 	}
 }
+initialize();
+
+function openDialog() {
+	var filePath = electron.dialog.showOpenDialogSync({
+		properties:['openDirectory']
+	});
+	if(filePath){
+		storage.set('dlDirectory', filePath[0]);
+		document.getElementById('downloadDirectory').value = storage.get('dlDirectory');
+	}
+}
 
 function deleteHistory() {
 	storage.set('history', new Array());
 }
 
 function youtubeDlDownload() {
+	document.getElementById('startDownload').disabled = true;
+	
 	//check if download directory exists
 	if(!fs.existsSync(storage.get('dlDirectory'))) {
 		alert("Download directory does not exist");
@@ -89,14 +95,6 @@ function youtubeDlDownload() {
 	var url = document.getElementById('videoInput').value;
 	var title = url;
 	
-	//get video format
-	var videoFormat = "";
-	// var videoFormatSelect = document.getElementById('videoFormat');
-	// if(videoFormatSelect.value)
-	// 	videoFormat = '--recode-video ' + videoFormatSelect.value;
-	// else
-	// 	videoFormat = '--recode-video ' + 'mp4';
-	
 	//start video download
 	var temp = child.spawn('cmd.exe', ['/c', 'runYoutubeDl.bat ' + formatOptions  + dlPath + ' \"' + url + '\"'], {shell: true});
 	
@@ -131,6 +129,7 @@ function youtubeDlDownload() {
 
 	//Closes the download
 	temp.on('exit', (code) => {
+		document.getElementById('startDownload').disabled = false;
 		console.log("Exit Code: " + code);
 		document.getElementById('loadingBar').style.width = 0;
 		document.getElementById('loadingPercent').innerHTML = "";
@@ -142,12 +141,20 @@ function youtubeDlDownload() {
 					Title:title,
 					Location:dlPath.slice(0, dlPath.length-13) + title,
 					Time:new Date().toLocaleString()
-				}
+				};
 				console.log(historyObject);
-				let his = storage.get('history');                			 //get history array from storage file
+				let his = storage.get('history');              			     //get history array from storage file
 				his.push(historyObject);                                	 //push the url on the history array
 				storage.set('history', his);
 				console.log("Finished Downloading");
+				
+				//add to history table
+				var histTable = document.getElementById('historyTable');
+				let row = histTable.insertRow(0);
+				let titleRow = row.insertCell(0);
+				let time = row.insertCell(1);
+				titleRow.innerHTML = title;
+				time.innerHTML = new Date().toLocaleString();
 			}
 			else
 				alert("An error occurred while downloading the video");

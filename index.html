@@ -16,14 +16,25 @@
 <body>
 
   <script>
-    function makeFileNameEditable() {
-      if (document.getElementById('defaultCheck').checked) {
-        document.getElementById('fileName').readOnly = true;
-        document.getElementById('fileName').value = "";
-      }
-      else
-        document.getElementById('fileName').readOnly = false;
-    }
+  function makeFileNameEditable() {
+		console.log("hi");
+	    if(document.getElementById('defaultCheck').checked) {
+			document.getElementById('fileName').readOnly = true;
+			document.getElementById('fileName').value = "";
+			}
+		else
+			document.getElementById('fileName').readOnly = false;
+	  }
+	  
+  function toggleHistory() {
+	 	document.getElementById('downloadTab').style.display = "none";
+		document.getElementById('historyTab').style.display = "block";
+  }
+  
+  function toggleMain() {
+		document.getElementById('downloadTab').style.display = "block";
+		document.getElementById('historyTab').style.display = "none";
+  }
   </script>
 
   <div class="container-fluid">
@@ -33,6 +44,10 @@
       <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="42%" y="22%">Video Downloader</text>
     </svg> -->
 
+  <div class="tabs" style="left:0;">
+	  <input type="button" id="mainButton" onclick="toggleMain()" value="Main"/>
+	  <input type="button" id="historyButton" onclick="toggleHistory()" value="History"/>
+  </div>
     <div class="row mb-3 py-2" style="background-color: black;">
       <div class="col"></div>
       <div class="col">
@@ -167,6 +182,20 @@
       </div>
       <div class="col"></div>
     </div>
+    <div id = "reset">
+        <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Download" />
+        <input type="button" id="resetField" onclick="" value="Reset Field" />
+	</div>
+</div>
+
+<div id="historyTab" style="display:none">
+	<input type="button" id="historyButton" value="Clear History" onclick= "deleteHistory()"></button>
+	<table id="historyTable">
+                <td>
+                    <th id="title">Title</th>
+                    <th id="downloadTime">Download Time</th>
+    </table>
+</div>
 
     <!-- </div> DOWNLOAD TAB -->
   </div>

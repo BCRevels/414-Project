@@ -15,15 +15,12 @@ const storage = new Storage({
 //set text of download directory
 document.getElementById('downloadDirectory').value = storage.get('dlDirectory');
 
-async function openDialog() {
-	var filePath = await electron.dialog.showOpenDialog({
-		properties:['openDirectory'],
-		filers:[
-			{name:'Log', extensions:['csv', 'log']}
-		]
+function openDialog() {
+	var filePath = electron.dialog.showOpenDialogSync({
+		properties:['openDirectory']
 	});
 	if(filePath){
-		storage.set('dlDirectory', filePath.filePaths[0]);
+		storage.set('dlDirectory', filePath[0]);
 		document.getElementById('downloadDirectory').value = storage.get('dlDirectory');
 	}
 }

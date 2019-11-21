@@ -1,22 +1,23 @@
 {
-  "name": "electron-quick-start",
+  "name": "youtube-dl-gui",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A GUI interface for youtube-dl",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/BCRevels/414-Project",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
+    "youtube-dl",
     "demo"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "BCRevels",
+  "license": "BSD-3-Clause",
   "devDependencies": {
-    "electron": "^6.0.10"
+    "electron": "^6.0.10",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.7"
   }
 }

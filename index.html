@@ -41,22 +41,15 @@
       <div class="link1">
         <input type="text" id="videoInput" placeholder="Paste link here.. e.g. https://www.youtube.com/watch?v=9vuqI2v2IRs" style="width: 55%; height: 7%; padding: 10px 24px; border-radius: 4px;"/>
       </div>
-        <p>What to Download:</p>
-        <input type="radio" name = "radioButtons" id="vpacbutton" value = "">Video + Audio (Combined)
-        <input type="radio" name = "radioButtons" id="vpasbutton" value = "">Video + Audio (Separate)
-        <input type="radio" name = "radioButtons" id="vobutton" value = "">Video Only
-        <input type="radio" name = "radioButtons" id="aobutton" value = "">Audio Only
 
         <br>
 
         <!-- drop down list for download types-->
-        <input list="downloadType" name="downloadType" placeholder="Download Type" style=" border-radius: 4px;"/>
-        <datalist id="downloadType">
-          <option value="Video w/ Sound">
-          <option value="Audio Only">
-          <option value="Keep Both">
-        </datalist>
-      </div>
+        <select name="downloadType" id="downloadType" selected="Full Video" style=" border-radius: 4px;"/>
+		  <option value="Full Video">Full Video</option>
+          <option value="Audio Only">Audio Only</option>
+		  <option value="Audio and Video">Audio and Video as Separate Files</option>
+      </select>
 
 
         <p id="header2">Select the directory you want to download your files to</p>
@@ -192,10 +185,9 @@ function sFunction() {
       }
     </script>
     <script src="./renderer.js"></script>
-<!-- 
+
 <div class="footer">
   <p>&copy; 2019 Video Downloader</p>
-</div> -->
 <style>
 
 </style>

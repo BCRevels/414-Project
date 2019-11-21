@@ -9,47 +9,43 @@
   <body>
 
     <!-- Puts the header as a svg -->
-  <svg width="100%" height="10%">
-    <rect width="100%" height="80%" background="#FFFFF9" style="fill:rgb(0,0,0);stroke-width:8;stroke:rgb(0,0,0)" />
-    <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="41%" y="50%">Video Downloader</text>
+  <svg width="100%" height="20%">
+    <rect width="100%" height="35%" background="#FFFFF9" style="fill:rgb(0,0,0);stroke-width:8;stroke:rgb(0,0,0)" />
+    <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="42%" y="22%">Video Downloader</text>
   </svg>
+
+  <div class="dropdown" style="float:left;">
+  <button class="dropbtn" style="width: 100px">Menu</button>
+  <div class="dropdown-content" style="left:0;">
+  <input type="button" id="dialogButton" onclick="openDialog()" value="Files"/>
+  <input type="button" id="deleteHistory" onclick="deleteHistory()" value="Delete History"/>
+  </div>
+</div>
+
 
   <div id="downloadTab" style="text-align:left" class="tabcnt">
     <!-- URL desired is put here. Youtube-dl handles the rest.  As long as they have the same type and id, these
         should be able to be placed anywhere. Feel free to mess with the styling -->
+    <p id="header1">Paste Video Links to download high quality videos with our video downloader</p>
       <div class="link1">
-      <p id="header1">Paste Video Links to download high quality videos with our video downloader</p>
-
-        <input type="text" id="videoInput" placeholder="Paste link here.. e.g. https://www.youtube.com/watch?v=9vuqI2v2IRs" style="width: 55%; height: 7%; padding: 10px 24px; border-radius: 4px; margin-left:-70px"/>
+        <input type="text" id="videoInput" placeholder="Paste link here.. e.g. https://www.youtube.com/watch?v=9vuqI2v2IRs" style="width: 40%; height: 7%; padding: 10px 24px; border-radius: 6px; margin-left:-70px"/>
+          <select id="downloadType" type="list" list="downloadType" name="downloadType" placeholder=" Download Type" style="width: 15%;  padding: 10px 24px; border-radius: 4px;"/>
+            <option value="Video w/ Audio">Video w/ Audio</option>
+            <option value="Video & Audio (Separate)">Video & Audio (Separate)</option>
+            <option value="Video Only">Video Only</option>
+            <option value="Audio Only">Audio Only</option>
+          </select>
       </div>
-<!--         <p>What to Download:</p>
-        <input type="radio" name = "radioButtons" id="vpacbutton" value = "">Video + Audio (Combined)
-        <input type="radio" name = "radioButtons" id="vpasbutton" value = "">Video + Audio (Separate)
-        <input type="radio" name = "radioButtons" id="vobutton" value = "">Video Only
-        <input type="radio" name = "radioButtons" id="aobutton" value = "">Audio Only -->
-
-        <br>
-      <div class="formats">
-        <p id="header3">Select file output:</p>
-        <input list="downloadType" name="downloadType" placeholder="  Download Type" style=" border-radius: 4px;"/>
-        <datalist id="downloadType">
-          <option value="Video + Audio (Combined)">
-          <option value="Video + Audio (Separate)">
-          <option value="Video Only">
-          <option value="Audio Only">
-        </datalist>
-      </div>
-
 
         <p id="header2">Select the directory you want to download your files to</p>
         <div class="link2">
-          <input type="text" id="downloadDirectory" placeholder="/home/user/Downloads" style="width: 55%; height: 5%; 
-          padding: 10px 24px; border-radius: 4px; margin-left:-70px"/>
+          <input type="text" id="downloadDirectory" placeholder="/home/user/Downloads" style="width: 56.5%; height: 5%; 
+          padding: 10px 24px; border-radius: 6px; margin-left:-70px"/>
         </div>
 
-        <p id="header4">File Name:</p>
+        <p id="header3">File Name:</p>
         <div class="link3">
-          <input type="text" id="fileName" placeholder="Video1" style="width: 45%; height: 10% padding: 10px 24px; border-radius: 4px;"/>
+          <input type="text" id="fileName" placeholder="Video1" style="width: 47%; height: 5% padding: 10px 24px; border-radius: 6px;"/>
           <label class="container">Use Default
           <input type="checkbox" checked="checked">
           <span class="checkmark"></span>
@@ -57,18 +53,59 @@
         </div>
         <br>
 
-        <div id = "reset">
+    <div id = "reset">
         <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Download" />
         <input type="button" id="resetField" onclick="" value="Reset Field" />
+        <input type="button" id="historyButton" value="History" onclick= "registerFunc()"></button>
+          <div id="table" style="display: none">
+            <table id="historyTable">
+                <td>
+                    <th id="title">Title</th>
+                    <th id="downloadTime">Download Time</th>
+            </table>
         </div>
-    </div>
+</div>
+</div>
 
+<script>
+    function registerFunc() { var y = document.getElementById('table');
+    if (y.style.display=="none"){
+      y.style.display = "block";
+          } else {
+        y.style.display = "none";
+      }       
+    };
+</script>
+
+<!--
+<p id="moreSettings" onclick="myFunction()">More Settings</button>
+
+<div id="toggle">
+  <input type="button" id="dialogButton" onclick="openDialog()" value="Files"/>
+  <input type="button" id="historyButton" onClick="listHistory()" value="History"/>
+  <input type="button" id="deleteHistory" onClick="deleteHistory()" value="Delete History"/>
+</div>
+
+  <script>
+    function myFunction() 
+    {
+      var x = document.getElementById("toggle");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+          } else {
+        x.style.display = "none";
+      }
+    }
+  </script>
+
+-->
+<!--
     <div class="link4">
       <p id="header4">Your No.1 Video Downloader</p>
         <p id="text"> Download your favourite videos form various websites to various formats using our Video Downloader. Download in these formats: MP3, M4A, WAV, FLAC, MP4, MKV, WEBM. Our premium Video Downloader offers high speed downloads from a wide range of websites like Youtube, Facebook, Twitter and many more!
     </div>
-
-
+-->
+<!--
     <div id="batchesTab" class="tabcnt">
     <p>Download Directory:</p>
     <input type="text" placeholder="/home/user/Downloads" style="width: 50%; height: 5%"/>
@@ -99,8 +136,10 @@
       <input type="button" id="clearAll" onclick="" value="Clear All" />
     </div>
   </div>
- 
+ -->
+
 <!-- The content are shown when the buttons are clicked -->
+<!--
 <script>
 function dFunction() {
   var x = document.getElementById("downloadTab");
@@ -133,29 +172,17 @@ function sFunction() {
   z.style.display = "block";
 }
 </script>
-
-	<input type="button" id="dialogButton" onclick="openDialog()" value="Files"/>
-	<input type="button" id="historyButton" onClick="listHistory()" value="History"/>
-	<input type="button" id="deleteHistory" onClick="deleteHistory()" value="Delete History"/>
+-->
 	
 	<!-- This is the loading bar -->
 	<svg width="100%" height="100">
-		<rect id="loadingBar" width="0" height="100" style="fill:rgb(0,200,0);" />
+		<rect id="loadingBar" width="0" height="100" style="fill:rgb(0,0,0);stroke-width:8;stroke:rgb(0,0,0)" />
   </svg>
 
 	
 	<img src="spinner.gif" id="spinner" width="30" height="30" style="visibility:hidden;">
 	<p id="loadingPercent"></p>
-	
-	
-	
-	<table id="history-table" width="50%">
-		<tr>
-			<th>Title</th>
-			<th>Download Time</th>
-		</tr>
-	</table>
-	
+
 	
     <!-- You can also require other files to run in this process -->
     <script>
@@ -178,15 +205,14 @@ function sFunction() {
       }
     </script>
     <script src="./renderer.js"></script>
+  </div>
 <!-- 
 <div class="footer">
 <<<<<<< Updated upstream
   <p>&copy; 2019 Video Downloader</p>
 </div> -->
-=======
-  <p>Copyright 2019 © Video Downloader. All Rights Reserved</p>
+  <p id="footer">Copyright 2019 © Video Downloader. All Rights Reserved</p>
 </div>
->>>>>>> Stashed changes
 <style>
 
 </style>

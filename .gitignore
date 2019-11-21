@@ -7,3 +7,5 @@ yarn.lock
 .vs/
 
 dist/
+
+package-lock.json

@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, electron} = require('electron')
+const {app, BrowserWindow, Menu, shell, electron} = require('electron')
 const path = require('path')
 const Storage = require('./storage.js')
 
@@ -20,8 +20,24 @@ const storage = new Storage({
 });
 
 function createWindow () {
-	//get stored window height and width
-	let{ width, height } = storage.get('windowBounds');
+  //get stored window height and width
+  let{ width, height } = storage.get('windowBounds');
+  
+  const menutemplate = [
+    {
+      role: 'About',
+      submenu: [
+        {
+          label: 'Learn More',
+          click: async () => {
+            await shell.openExternal('https://github.com/BCRevels/414-Project')
+          }
+        }
+      ]
+    }
+  ]
+
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menutemplate));
 	
 	//creates the storage file. I don't know if there is a better way to do it but
 	//	this is the best way to guarentee a storage file is made.

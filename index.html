@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css">
     <title>Video Downloader</title>
-
+	
   </head>
   <body>
+  
+  <script>
+  function makeFileNameEditable() {
+		console.log("hi");
+	    if(document.getElementById('defaultCheck').checked) {
+			document.getElementById('fileName').readOnly = true;
+			document.getElementById('fileName').value = "";
+			}
+		else
+			document.getElementById('fileName').readOnly = false;
+	  }
+  </script>
 
     <!-- Puts the header as a svg -->
   <svg width="100%" height="20%">
@@ -37,6 +49,16 @@
           </select>
       </div>
 
+        <br>
+
+        <!-- drop down list for download types-->
+        <select name="downloadType" id="downloadType" selected="Full Video" style=" border-radius: 4px;"/>
+		  <option value="Full Video">Full Video</option>
+          <option value="Audio Only">Audio Only</option>
+		  <option value="Audio and Video">Audio and Video as Separate Files</option>
+      </select>
+
+
         <p id="header2">Select the directory you want to download your files to</p>
         <div class="link2">
           <input type="text" id="downloadDirectory" placeholder="/home/user/Downloads" style="width: 56.5%; height: 5%; 
@@ -47,7 +69,7 @@
         <div class="link3">
           <input type="text" id="fileName" placeholder="Video1" style="width: 47%; height: 5% padding: 10px 24px; border-radius: 6px;"/>
           <label class="container">Use Default
-          <input type="checkbox" checked="checked">
+          <input type="checkbox" checked="checked" id="defaultCheck" onclick="makeFileNameEditable()">
           <span class="checkmark"></span>
           </label>
         </div>
@@ -108,7 +130,7 @@
 <!--
     <div id="batchesTab" class="tabcnt">
     <p>Download Directory:</p>
-    <input type="text" placeholder="/home/user/Downloads" style="width: 50%; height: 5%"/>
+    <input type="text" placeholder="/home/user/Downloads" readonly style="width: 50%; height: 5%"/>
 
     <p>URL to Video:</p>
     <input type="text" placeholder="https://www.youtube.com/watch" style="width: 50%; height: 5%"/>
@@ -186,6 +208,8 @@ function sFunction() {
 	
     <!-- You can also require other files to run in this process -->
     <script>
+	  
+	
       function openTab(evt, tabAction) {
         // Declare all variables
         var t, tabcnt, tablnks;

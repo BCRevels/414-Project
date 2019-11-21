@@ -43,7 +43,6 @@ function listHistory() {
 			time.innerHTML = histContent[i].Time;
 		}
 	}
-	console.log(histContent);
 }
 
 function deleteHistory() {
@@ -57,16 +56,41 @@ function youtubeDlDownload() {
 		return 0;
 	}
 	
+	//Get type of download (full video, audio only, etc.)
+	var formatName = "";
+	var formatOptions = "";
+	var ext = '.%(ext)s';
+	if(document.getElementById('downloadType').value == 'Audio Only')
+		ext = '.wav';
+	else if(document.getElementById('downloadType').value == 'Audio and Video') {
+		formatOptions = "-f \"bestvideo,bestaudio\" ";
+		formatName = '.f%(format_id)s';
+	}
+	
+	//get file name
+	dlPath = ' -o \"';
+	if(document.getElementById('defaultCheck').checked)
+		dlPath = dlPath + storage.get('dlDirectory') + '\\\%(title)s';
+	else {
+		var fileName = document.getElementById('fileName').value;
+		var reg = new RegExp('[^\\s\\-a-zA-Z0-9\\_\\$\\#\\~\\!\\@\\%\\^\\&\\(\\)\\\']');
+		console.log(fileName.match(reg));
+		if(fileName.match(reg)) {
+			alert(fileName + ' is not a valid file name');
+			return;
+		}
+		dlPath = dlPath + storage.get('dlDirectory') + '\\' + document.getElementById('fileName').value;
+	}
+	dlPath = dlPath + formatName + ext + '\" ';
+	
 	//make spinner and loading percentage visible
 	document.getElementById('spinner').style.visibility = 'visible';
 	document.getElementById('loadingPercent').innerHTML = '0%';
 	var newDownload = true;
 	
 	//get input and build values for sending to 
-	var dlRegex = new RegExp('[\\\/\=\:\.]', 'g');
 	var url = document.getElementById('videoInput').value;
 	var title = url;
-	dlPath = storage.get('dlDirectory') + '\\\%(title)s.%(ext)s';
 	
 	//get video format
 	var videoFormat = "";
@@ -77,7 +101,7 @@ function youtubeDlDownload() {
 	// 	videoFormat = '--recode-video ' + 'mp4';
 	
 	//start video download
-	var temp = child.spawn('cmd.exe', ['/c', 'runYoutubeDl.bat \"' + dlPath + '\" ' + videoFormat + ' \"' + url + '\"'], {shell: true});
+	var temp = child.spawn('cmd.exe', ['/c', 'runYoutubeDl.bat ' + formatOptions  + dlPath + ' \"' + url + '\"'], {shell: true});
 	
 	//////child events//////
 	

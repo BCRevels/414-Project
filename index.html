@@ -18,6 +18,16 @@
 		else
 			document.getElementById('fileName').readOnly = false;
 	  }
+	  
+  function toggleHistory() {
+	 	document.getElementById('downloadTab').style.display = "none";
+		document.getElementById('historyTab').style.display = "block";
+  }
+  
+  function toggleMain() {
+		document.getElementById('downloadTab').style.display = "block";
+		document.getElementById('historyTab').style.display = "none";
+  }
   </script>
 
     <!-- Puts the header as a svg -->
@@ -26,13 +36,10 @@
     <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="42%" y="22%">Video Downloader</text>
   </svg>
 
-  <div class="dropdown" style="float:left;">
-  <button class="dropbtn" style="width: 100px">Menu</button>
-  <div class="dropdown-content" style="left:0;">
-  <input type="button" id="dialogButton" onclick="openDialog()" value="Files"/>
-  <input type="button" id="deleteHistory" onclick="deleteHistory()" value="Delete History"/>
+  <div class="tabs" style="left:0;">
+	  <input type="button" id="mainButton" onclick="toggleMain()" value="Main"/>
+	  <input type="button" id="historyButton" onclick="toggleHistory()" value="History"/>
   </div>
-</div>
 
 
   <div id="downloadTab" style="text-align:left" class="tabcnt">
@@ -61,6 +68,7 @@
 
         <p id="header2">Select the directory you want to download your files to</p>
         <div class="link2">
+		  <input type="button" id="dialogButton" onclick="openDialog()" value="Choose Location"/>
           <input type="text" id="downloadDirectory" placeholder="/home/user/Downloads" style="width: 56.5%; height: 5%; 
           padding: 10px 24px; border-radius: 6px; margin-left:-70px"/>
         </div>
@@ -78,26 +86,17 @@
     <div id = "reset">
         <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Download" />
         <input type="button" id="resetField" onclick="" value="Reset Field" />
-        <input type="button" id="historyButton" value="History" onclick= "registerFunc()"></button>
-          <div id="table" style="display: none">
-            <table id="historyTable">
+	</div>
+</div>
+
+<div id="historyTab" style="display:none">
+	<input type="button" id="historyButton" value="Clear History" onclick= "deleteHistory()"></button>
+	<table id="historyTable">
                 <td>
                     <th id="title">Title</th>
                     <th id="downloadTime">Download Time</th>
-            </table>
-        </div>
+    </table>
 </div>
-</div>
-
-<script>
-    function registerFunc() { var y = document.getElementById('table');
-    if (y.style.display=="none"){
-      y.style.display = "block";
-          } else {
-        y.style.display = "none";
-      }       
-    };
-</script>
 
 <!--
 <p id="moreSettings" onclick="myFunction()">More Settings</button>

@@ -70,11 +70,11 @@ function youtubeDlDownload() {
 	
 	//get video format
 	var videoFormat = "";
-	var videoFormatSelect = document.getElementById('videoFormat');
-	if(videoFormatSelect.value)
-		videoFormat = '--recode-video ' + videoFormatSelect.value;
-	else
-		videoFormat = '--recode-video ' + 'mp4';
+	// var videoFormatSelect = document.getElementById('videoFormat');
+	// if(videoFormatSelect.value)
+	// 	videoFormat = '--recode-video ' + videoFormatSelect.value;
+	// else
+	// 	videoFormat = '--recode-video ' + 'mp4';
 	
 	//start video download
 	var temp = child.spawn('cmd.exe', ['/c', 'runYoutubeDl.bat \"' + dlPath + '\" ' + videoFormat + ' \"' + url + '\"'], {shell: true});

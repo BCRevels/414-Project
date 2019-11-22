@@ -75,7 +75,7 @@ function youtubeDlDownload() {
 	if(document.getElementById('downloadType').value == 'AudioOnly')
 		ext = '.wav';
 	else if(document.getElementById('downloadType').value == 'Audio+Video') {
-		formatOptions = "-f \"bestvideo,bestaudio\" ";
+		formatOptions = "-f \"best\" ";
 		formatName = '.f%(format_id)s';
 	}
 	

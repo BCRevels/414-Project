@@ -46,6 +46,15 @@ function openDialog() {
 	}
 }
 
+function clearFields() {
+	document.getElementById('downloadDirectory').value = electron.app.getPath('videos');
+	document.getElementById('videoInput').value = "";
+	document.getElementById('defaultCheck').checked = false;
+	document.getElementById('fileName').readOnly = false;
+	document.getElementById('fileName').value = "";
+	document.getElementById('downloadType').value = "Audio+Video";
+}
+
 function deleteHistory() {
 	storage.set('history', new Array());
 }
@@ -63,9 +72,9 @@ function youtubeDlDownload() {
 	var formatName = "";
 	var formatOptions = "";
 	var ext = '.%(ext)s';
-	if(document.getElementById('downloadType').value == 'Audio Only')
+	if(document.getElementById('downloadType').value == 'AudioOnly')
 		ext = '.wav';
-	else if(document.getElementById('downloadType').value == 'Audio and Video') {
+	else if(document.getElementById('downloadType').value == 'Audio+Video') {
 		formatOptions = "-f \"bestvideo,bestaudio\" ";
 		formatName = '.f%(format_id)s';
 	}

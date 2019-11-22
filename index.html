@@ -17,7 +17,7 @@
 
   <script>
     function makeFileNameEditable() {
-
+      console.log(document.getElementById('defaultCheck').checked)
       if (document.getElementById('defaultCheck').checked) {
         document.getElementById('fileName').readOnly = true;
         document.getElementById('fileName').value = "";
@@ -76,10 +76,10 @@
         <select class="form-control" id="downloadType" type="list" list="downloadType" name="downloadType"
           placeholder=" Download Type">
           <!-- style="width: 15%;  padding: 10px 24px; border-radius: 4px;" /> -->
-          <option value="Video w/ Audio">Video w/ Audio</option>
+          <option value="Audio+Video">Video w/ Audio</option>
           <!-- <option value="Video & Audio (Separate)">Video & Audio (Separate)</option> -->
           <!-- <option value="Video Only">Video Only</option> -->
-          <option value="Audio Only">Audio Only</option>
+          <option value="AudioOnly">Audio Only</option>
         </select>
       </div>
     </div>
@@ -129,11 +129,10 @@
                 <!-- style="width: 47%; height: 5%; padding: 10px 24px; border-radius: 6px;" / -->
                 <div class="form-check form-check-inline input-group-append">
                   <label class="container form-check-label">Use Default Name</label>
-                  <input class="form-check-input" type="checkbox" checked="" id="defaultCheck"
+                  <input class="form-check-input" type="checkbox" id="defaultCheck"
                     onclick="makeFileNameEditable()">
                   <span class="checkmark"></span>
                 </div>
-
               </div>
             </div>
           </div>
@@ -149,7 +148,7 @@
         <div class="btn-group" role="group">
           <button class="btn btn-success" type="button" id="startDownload" onclick="youtubeDlDownload()"
             value="Start Download">Start Download</button>
-          <button class="btn btn-danger" type="button" id="resetField" onclick="" value="Reset Fields">Reset
+          <button class="btn btn-danger" type="button" id="resetField" onclick="clearFields()" value="Reset Fields">Reset
             Fields</button>
           <button class="btn btn-warning" type="button" id="historyButton" onclick="toggleHistory()"
             value="History">Show

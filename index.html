@@ -134,15 +134,19 @@
     </div>
     <!-- <br> -->
 
-    <div class="row">
+    <div class="row mb-4">
       <div class="col"></div>
       <div class="col-auto">
         <!-- <div id="reset"> -->
-        <input class="btn btn-danger" type="button" id="startDownload" onclick="youtubeDlDownload()"
-          value="Start Download" />
-        <input class="btn btn-danger" type="button" id="resetField" onclick="" value="Reset Field" />
-        <input class="btn btn-danger" type="button" id="historyButton" value="History"
-          onclick="registerFunc()"></button>
+        <div class="btn-group" role="group">
+          <button class="btn btn-success" type="button" id="startDownload" onclick="youtubeDlDownload()"
+            value="Start Download">Start Download</button>
+          <button class="btn btn-danger" type="button" id="resetField" onclick="" value="Reset Fields">Reset
+            Fields</button>
+          <button class="btn btn-warning" type="button" id="historyButton" onclick="toggleHistory()"
+            value="History">Show
+            History</button>
+        </div>
       </div>
       <div class="col"></div>
     </div>

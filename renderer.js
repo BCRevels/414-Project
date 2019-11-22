@@ -48,6 +48,7 @@ function openDialog() {
 
 function clearFields() {
 	document.getElementById('downloadDirectory').value = electron.app.getPath('videos');
+	storage.set('dlDirectory', electron.app.getPath('videos'));
 	document.getElementById('videoInput').value = "";
 	document.getElementById('defaultCheck').checked = false;
 	document.getElementById('fileName').readOnly = false;
@@ -125,7 +126,7 @@ function youtubeDlDownload() {
 			dlpercent = dlpercent[dlpercent.length-1];				
 			dlpercent = dlpercent.slice(2, dlpercent.length);		
 			dlpercent = parseFloat(dlpercent);													//change from string to float
-			document.getElementById('loadingBar').style.color = `rgb(${255-(dlpercent*2.55)},0,${(dlpercent*2.55)})`;				//update loading bar
+			document.getElementById('loadingBar').style.color = `rgb(${255-(dlpercent*2.55)},${(dlpercent*2.55)},0)`;				//update loading bar
 			document.getElementById('loadingPercent').innerHTML = dlpercent + '%';
 		}
 	});
@@ -140,7 +141,7 @@ function youtubeDlDownload() {
 	temp.on('exit', (code) => {
 		document.getElementById('startDownload').disabled = false;
 		console.log("Exit Code: " + code);
-		document.getElementById('loadingBar').style.visibility = 'invisible';
+		document.getElementById('loadingBar').style.visibility = 'hidden';
 		document.getElementById('loadingBar').style.color = 'rgb(255,0,0)';
 		document.getElementById('loadingPercent').innerHTML = "";
 		

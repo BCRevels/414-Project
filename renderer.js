@@ -1,7 +1,6 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-var { spawn } = require('child_process');
 const Storage = require('./storage.js');
 const electron = require('electron').remote;
 var child = require('child_process');
@@ -34,6 +33,7 @@ function initialize() {
 		}
 	}
 }
+
 initialize();
 
 function openDialog() {

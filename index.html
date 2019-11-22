@@ -144,8 +144,10 @@
         <div class="btn-group" role="group">
           <button class="btn btn-success" type="button" id="startDownload" onclick="youtubeDlDownload()"
             value="Start Download">Start Download</button>
-          <button class="btn btn-danger" type="button" id="resetField" onclick="" value="Reset Fields">Reset Fields</button>
-          <button class="btn btn-warning" type="button" id="historyButton" onclick="toggleHistory()" value="History">Show
+          <button class="btn btn-danger" type="button" id="resetField" onclick="" value="Reset Fields">Reset
+            Fields</button>
+          <button class="btn btn-warning" type="button" id="historyButton" onclick="toggleHistory()"
+            value="History">Show
             History</button>
         </div>
       </div>
@@ -167,7 +169,8 @@
           <div class="btn-group" role="group">
             <button class="btn btn-danger btn-sm" type="button" id="historyButton" value="Clear History"
               onclick="deleteHistory()">Clear History</button>
-            <button class="btn btn-success btn-sm" type="button" id="mainButton" onclick="toggleMain()" value="Main">Hide
+            <button class="btn btn-success btn-sm" type="button" id="mainButton" onclick="toggleMain()"
+              value="Main">Hide
               History</button>
           </div>
           <table id="historyTable">
@@ -198,6 +201,16 @@
         y.style.display = "none";
       }
     };
+  </script>
+
+  <script>
+    document.addEventListener("keydown", function (e) {
+      if (e.which === 123) {
+        require('remote').getCurrentWindow().toggleDevTools();
+      } else if (e.which === 116) {
+        location.reload();
+      }
+    });
   </script>
 
   <!--

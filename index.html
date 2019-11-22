@@ -7,7 +7,7 @@
   <title>Video Downloader</title>
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-  <link rel="stylesheet" href="./resources/bootstrap.min.css"/>
+  <link rel="stylesheet" href="./resources/bootstrap.min.css" />
   <script>let $ = require('jquery');</script>
   <script>require('popper.js');</script>
   <script>require('bootstrap');</script>
@@ -16,25 +16,25 @@
 <body>
 
   <script>
-  function makeFileNameEditable() {
-		console.log("hi");
-	    if(document.getElementById('defaultCheck').checked) {
-			document.getElementById('fileName').readOnly = true;
-			document.getElementById('fileName').value = "";
-			}
-		else
-			document.getElementById('fileName').readOnly = false;
-	  }
-	  
-  function toggleHistory() {
-	 	document.getElementById('downloadTab').style.display = "none";
-		document.getElementById('historyTab').style.display = "block";
-  }
-  
-  function toggleMain() {
-		document.getElementById('downloadTab').style.display = "block";
-		document.getElementById('historyTab').style.display = "none";
-  }
+    function makeFileNameEditable() {
+      console.log("hi");
+      if (document.getElementById('defaultCheck').checked) {
+        document.getElementById('fileName').readOnly = true;
+        document.getElementById('fileName').value = "";
+      }
+      else
+        document.getElementById('fileName').readOnly = false;
+    }
+
+    function toggleHistory() {
+      document.getElementById('downloadTab').style.display = "none";
+      document.getElementById('historyTab').style.display = "block";
+    }
+
+    function toggleMain() {
+      document.getElementById('downloadTab').style.display = "block";
+      document.getElementById('historyTab').style.display = "none";
+    }
   </script>
 
   <div class="container-fluid">
@@ -44,10 +44,7 @@
       <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="42%" y="22%">Video Downloader</text>
     </svg> -->
 
-  <div class="tabs" style="left:0;">
-	  <input type="button" id="mainButton" onclick="toggleMain()" value="Main"/>
-	  <input type="button" id="historyButton" onclick="toggleHistory()" value="History"/>
-  </div>
+
     <div class="row mb-3 py-2" style="background-color: black;">
       <div class="col"></div>
       <div class="col">
@@ -56,22 +53,6 @@
       <div class="col"></div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <div class=" dropright">
-          <!-- style="float:left;" -->
-          <button class="dropbtn btn btn-danger dropdown-toggle text-white" data-toggle="dropdown">Menu</button>
-          <div class="dropdown-menu">
-            <!-- style="left:0;" -->
-            <button class="dropdown-item" type="button" id="dialogButton" onclick="openDialog()"
-              value="Files">Files</button>
-            <button class="dropdown-item" type="button" id="deleteHistory" onclick="deleteHistory()"
-              value="Delete History">Delete History</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-8"></div>
-    </div>
     <div id="downloadTab" style="text-align:left" class="tabcnt"> </div>
     <!-- URL desired is put here. Youtube-dl handles the rest.  As long as they have the same type and id, these
         should be able to be placed anywhere. Feel free to mess with the styling -->
@@ -156,23 +137,39 @@
     </div>
     <!-- <br> -->
 
-    <div class="row">
+    <div class="row mb-4">
       <div class="col"></div>
       <div class="col-auto">
         <!-- <div id="reset"> -->
-        <input class="btn btn-danger" type="button" id="startDownload" onclick="youtubeDlDownload()"
-          value="Start Download" />
-        <input class="btn btn-danger" type="button" id="resetField" onclick="" value="Reset Field" />
-        <input class="btn btn-danger" type="button" id="historyButton" value="History"
-          onclick="registerFunc()"></button>
+        <div class="btn-group" role="group">
+          <button class="btn btn-success" type="button" id="startDownload" onclick="youtubeDlDownload()"
+            value="Start Download">Start Download</button>
+          <button class="btn btn-danger" type="button" id="resetField" onclick="" value="Reset Fields">Reset Fields</button>
+          <button class="btn btn-warning" type="button" id="historyButton" onclick="toggleHistory()" value="History">Show
+            History</button>
+        </div>
       </div>
       <div class="col"></div>
     </div>
 
+    <!-- <div class="row justify-content-start">
+      <div class="col"></div>
+      <div class="col-auto">
+
+      </div>
+      <div class="col"></div>
+    </div> -->
+
     <div class="row">
       <div class="col"></div>
       <div class="col-auto">
-        <div id="table" style="display: none">
+        <div id="historyTab" style="display:none">
+          <div class="btn-group" role="group">
+            <button class="btn btn-danger btn-sm" type="button" id="historyButton" value="Clear History"
+              onclick="deleteHistory()">Clear History</button>
+            <button class="btn btn-success btn-sm" type="button" id="mainButton" onclick="toggleMain()" value="Main">Hide
+              History</button>
+          </div>
           <table id="historyTable">
             <td>
             <th id="title">Title</th>
@@ -182,20 +179,6 @@
       </div>
       <div class="col"></div>
     </div>
-    <div id = "reset">
-        <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Download" />
-        <input type="button" id="resetField" onclick="" value="Reset Field" />
-	</div>
-</div>
-
-<div id="historyTab" style="display:none">
-	<input type="button" id="historyButton" value="Clear History" onclick= "deleteHistory()"></button>
-	<table id="historyTable">
-                <td>
-                    <th id="title">Title</th>
-                    <th id="downloadTime">Download Time</th>
-    </table>
-</div>
 
     <!-- </div> DOWNLOAD TAB -->
   </div>

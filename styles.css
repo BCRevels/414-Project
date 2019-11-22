@@ -1,3 +1,27 @@
+table {
+	border:solid;
+	border-width: 2px;
+	width: 80%;
+	margin-top: 2%;
+	font-size:120%;
+}
+
+tr {
+	border:solid;
+	border-width: 2px;
+}
+
+td {
+	border:solid;
+	border-width: 2px;
+}
+
+th {
+	border:solid;
+	border-width: 2px;
+	text-align: center;
+}
+
 /* * {box-sizing: border-box}
 
 html {

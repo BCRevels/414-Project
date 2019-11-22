@@ -70,6 +70,7 @@ function createWindow () {
 		let { width, height } = mainWindow.getBounds();
 		storage.set('windowBounds', { width, height });
   });
+  //mainWindow.webContents.openDevTools();
 }
 
 // This method will be called when Electron has finished

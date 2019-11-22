@@ -23,7 +23,7 @@ function initialize() {
 	histList.style.visibility = 'visible';
 	let histContent = storage.get('history');
 	histContent.reverse();
-	
+	console.log(histContent);
 	if(histContent.length > 1) {
 		for(var i = 0; i < histContent.length; i++) {
 			let row = histList.insertRow(i+1);
@@ -86,9 +86,10 @@ function youtubeDlDownload() {
 	}
 	dlPath = dlPath + formatName + ext + '\" ';
 	
-	//make spinner and loading percentage visible
+	//make spinner and loading bar/percentage visible
 	document.getElementById('spinner').style.visibility = 'visible';
 	document.getElementById('loadingPercent').innerHTML = '0%';
+	document.getElementById('loadingBarContainer').style.visibility = 'visible';
 	var newDownload = true;
 	
 	//get input and build values for sending to 
@@ -133,6 +134,7 @@ function youtubeDlDownload() {
 		console.log("Exit Code: " + code);
 		document.getElementById('loadingBar').style.width = 0;
 		document.getElementById('loadingPercent').innerHTML = "";
+		document.getElementById('loadingBarContainer').style.visibility = 'hidden';
 		
 		if(newDownload){
 			if(code == 0) {

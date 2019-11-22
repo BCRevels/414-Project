@@ -8,6 +8,7 @@
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="./resources/bootstrap.min.css"/>
+  <link rel="stylesheet" href="./styles.css" />
   <script>let $ = require('jquery');</script>
   <script>require('popper.js');</script>
   <script>require('bootstrap');</script>
@@ -29,25 +30,19 @@
   function toggleHistory() {
 	 	document.getElementById('downloadTab').style.display = "none";
 		document.getElementById('historyTab').style.display = "block";
+		document.getElementById('clearHistory').style.visibility = 'visible';
   }
   
   function toggleMain() {
 		document.getElementById('downloadTab').style.display = "block";
 		document.getElementById('historyTab').style.display = "none";
+		document.getElementById('clearHistory').style.visibility = 'hidden';
   }
   </script>
 
   <div class="container-fluid">
-    <!-- Puts the header as a svg -->
-    <!-- <svg width="100%" height="20%">
-      <rect width="100%" height="35%" background="#FFFFF9" style="fill:rgb(0,0,0);stroke-width:8;stroke:rgb(0,0,0)" />
-      <text fill="#d9473d" font-size="26" font-family="Manjari,sans-serif" x="42%" y="22%">Video Downloader</text>
-    </svg> -->
-
-  <div class="tabs" style="left:0;">
-	  <input type="button" id="mainButton" onclick="toggleMain()" value="Main"/>
-	  <input type="button" id="historyButton" onclick="toggleHistory()" value="History"/>
-  </div>
+	
+	<!--Header-->
     <div class="row mb-3 py-2" style="background-color: black;">
       <div class="col"></div>
       <div class="col">
@@ -56,23 +51,13 @@
       <div class="col"></div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <div class=" dropright">
-          <!-- style="float:left;" -->
-          <button class="dropbtn btn btn-danger dropdown-toggle text-white" data-toggle="dropdown">Menu</button>
-          <div class="dropdown-menu">
-            <!-- style="left:0;" -->
-            <button class="dropdown-item" type="button" id="dialogButton" onclick="openDialog()"
-              value="Files">Files</button>
-            <button class="dropdown-item" type="button" id="deleteHistory" onclick="deleteHistory()"
-              value="Delete History">Delete History</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-8"></div>
+	<!--Tabs-->
+	<div class="tabs" style="left:0;">
+		  <input class="btn btn-danger text-white" type="button" id="mainButton" onclick="toggleMain()" value="Main"/>
+		  <input class="btn btn-danger text-white" type="button" id="historyButton" onclick="toggleHistory()" value="History"/>
+		  <input class="btn btn-danger text-white" type="button" id="clearHistory" value="Clear History" onclick= "deleteHistory()" style="visibility:hidden;float:right"/>
     </div>
-    <div id="downloadTab" style="text-align:left" class="tabcnt"> </div>
+    <div id="downloadTab" style="text-align:left" class="tabcnt">
     <!-- URL desired is put here. Youtube-dl handles the rest.  As long as they have the same type and id, these
         should be able to be placed anywhere. Feel free to mess with the styling -->
 
@@ -103,15 +88,6 @@
       </div>
     </div>
 
-    <!-- <br> -->
-
-    <!-- drop down list for download types-->
-    <!-- <select name="downloadType" id="downloadType" selected="Full Video" style=" border-radius: 4px;" />
-      <option value="Full Video">Full Video</option>
-      <option value="Audio Only">Audio Only</option>
-      <option value="Audio and Video">Audio and Video as Separate Files</option>
-      </select> -->
-
     <div class="row mt-4">
       <div class="col"></div>
       <div class="col-auto">
@@ -122,8 +98,10 @@
 
     <div class="row">
       <div class="col">
-        <input class="form-control" type="text" id="downloadDirectory" placeholder="/home/user/Downloads" />
+	  <form>
+        <input class="form-control" type="text" id="downloadDirectory" readonly placeholder="/home/user/Downloads" />
         <!-- style="width: 56.5%; height: 5%; padding: 10px 24px; border-radius: 6px; margin-left:-70px" / -->
+		</form>
       </div>
     </div>
 
@@ -168,168 +146,33 @@
       </div>
       <div class="col"></div>
     </div>
+	
+	<svg width="90%" height="50" id="loadingBarContainer" style="align:center;margin-top:2%;margin-bottom:2%;border-style:solid;visibility:hidden;">
+		<rect id="loadingBar" width="0" height="50" style="fill:rgb(0,150,0);stroke:black;stroke-width:4;"/>
+	</svg>
+	<img src="spinner.gif" id="spinner" width="30" height="30" style="visibility:hidden;" />
+	<p id="loadingPercent"></p>
+</div>
+</div>
 
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-auto">
-        <div id="table" style="display: none">
-          <table id="historyTable">
-            <td>
-            <th id="title">Title</th>
-            <th id="downloadTime">Download Time</th>
-          </table>
-        </div>
-      </div>
-      <div class="col"></div>
-    </div>
-    <div id = "reset">
-        <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Download" />
-        <input type="button" id="resetField" onclick="" value="Reset Field" />
+<div class="container-fluid">
+<div id="historyTab" style="display:none">
+	<table id="historyTable">
+		<tr>
+			<th id="title">Title</th>
+			<th id="downloadTime">Download Time</th>
+		</tr>
+    </table>
 	</div>
 </div>
-
-<div id="historyTab" style="display:none">
-	<input type="button" id="historyButton" value="Clear History" onclick= "deleteHistory()"></button>
-	<table id="historyTable">
-                <td>
-                    <th id="title">Title</th>
-                    <th id="downloadTime">Download Time</th>
-    </table>
 </div>
-
-    <!-- </div> DOWNLOAD TAB -->
-  </div>
+</div>
 
   <footer class="footer">
     <p id="footer" class="text-center text-muted font-weight-bold">Copyright 2019 © Video Downloader. All Rights
       Reserved
     </p>
   </footer>
-
-  <script>
-    function registerFunc() {
-      var y = document.getElementById('table');
-      if (y.style.display == "none") {
-        y.style.display = "block";
-      } else {
-        y.style.display = "none";
-      }
-    };
-  </script>
-
-  <!--
-<p id="moreSettings" onclick="myFunction()">More Settings</button>
-
-<div id="toggle">
-  <input type="button" id="dialogButton" onclick="openDialog()" value="Files"/>
-  <input type="button" id="historyButton" onClick="listHistory()" value="History"/>
-  <input type="button" id="deleteHistory" onClick="deleteHistory()" value="Delete History"/>
-</div>
-
-  <script>
-    function myFunction() 
-    {
-      var x = document.getElementById("toggle");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-          } else {
-        x.style.display = "none";
-      }
-    }
-  </script>
-
--->
-  <!--
-    <div class="link4">
-      <p id="header4">Your No.1 Video Downloader</p>
-        <p id="text"> Download your favourite videos form various websites to various formats using our Video Downloader. Download in these formats: MP3, M4A, WAV, FLAC, MP4, MKV, WEBM. Our premium Video Downloader offers high speed downloads from a wide range of websites like Youtube, Facebook, Twitter and many more!
-    </div>
--->
-  <!--
-    <div id="batchesTab" class="tabcnt">
-    <p>Download Directory:</p>
-    <input type="text" placeholder="/home/user/Downloads" readonly style="width: 50%; height: 5%"/>
-
-    <p>URL to Video:</p>
-    <input type="text" placeholder="https://www.youtube.com/watch" style="width: 50%; height: 5%"/>
-    <input list="resolutionFormats" name="resolution" placeholder="Resolution" style="width:15%; height: 5%">
-    
-    <div id="batches">
-    <input type="button" id="addToList" onclick="" value="Add to List" />
-    <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Downloads" />
-    </div>
-	
-	
-
-    <datalist id="resolutionFormats">
-      <option value="1080p">
-      <option value="720p">
-      <option value="480p">
-      <option value="240p">
-    <input type="button" id="clearAll" onclick="" value="Clear All" />
-    </datalist>
-    </div>
-
-  <div id="settingsTab" class="tabcnt">
-    <div id="settings">
-      <input type="button" id="startDownload" onclick="youtubeDlDownload()" value="Start Downloads" />
-      <input type="button" id="clearAll" onclick="" value="Clear All" />
-    </div>
-  </div>
- -->
-
-  <!-- The content are shown when t
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>he buttons are clicked -->
-  <!--
-<script>
-function dFunction() {
-  var x = document.getElementById("downloadTab");
-  var y = document.getElementById("batchesTab");
-  var z = document.getElementById("settingsTab");
-  x.style.display = "block";
-  y.style.display = "none";
-  z.style.display = "none";
-}
-</script>
-
-<script>
-function bFunction() {
-  var x = document.getElementById("downloadTab");
-  var y = document.getElementById("batchesTab");
-  var z = document.getElementById("settingsTab");
-  x.style.display = "none";
-  y.style.display = "block";
-  z.style.display = "none";
-}
-</script>
-
-<script>
-function sFunction() {
-  var x = document.getElementById("downloadTab");
-  var y = document.getElementById("batchesTab");
-  var z = document.getElementById("settingsTab");
-  x.style.display = "none";
-  y.style.display = "none";
-  z.style.display = "block";
-}
-</script>
--->
-
-  <!-- This is the loading bar -->
-  <svg width="100%" height="100">
-    <rect id="loadingBar" width="0" height="100" style="fill:rgb(0,0,0);stroke-width:8;stroke:rgb(0,0,0)" />
-  </svg>
-
-
-  <img src="spinner.gif" id="spinner" width="30" height="30" style="visibility:hidden;" />
-  <p id="loadingPercent"></p>
-
 
   <!-- You can also require other files to run in this process -->
   <script>

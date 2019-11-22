@@ -15,9 +15,11 @@
   "author": "BCRevels",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "electron": "^6.0.10",
     "bootstrap": "^4.3.1",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.7"
+  },
+  "dependencies": {
+    "electron": "^7.1.2"
   }
 }

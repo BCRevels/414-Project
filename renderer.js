@@ -96,14 +96,14 @@ function youtubeDlDownload() {
 	dlPath = dlPath + formatName + ext + '\" ';
 	
 	//make spinner and loading percentage visible
-	document.getElementById('spinner').style.visibility = 'visible';
+	//document.getElementById('spinner').style.visibility = 'visible';
 	document.getElementById('loadingPercent').innerHTML = '0%';
 	var newDownload = true;
 	
 	//get input and build values for sending to 
 	var url = document.getElementById('videoInput').value;
 	var title = url;
-	
+	document.getElementById('loadingBar').style.visibility = 'visible'
 	//start video download
 	var temp = child.spawn('cmd.exe', ['/c', 'runYoutubeDl.bat ' + formatOptions  + dlPath + ' \"' + url + '\"'], {shell: true});
 	
@@ -125,7 +125,7 @@ function youtubeDlDownload() {
 			dlpercent = dlpercent[dlpercent.length-1];				
 			dlpercent = dlpercent.slice(2, dlpercent.length);		
 			dlpercent = parseFloat(dlpercent);													//change from string to float
-			document.getElementById('loadingBar').style.width = dlpercent + '%';				//update loading bar
+			document.getElementById('loadingBar').style.color = `rgb(${255-(dlpercent*2.55)},0,${(dlpercent*2.55)})`;				//update loading bar
 			document.getElementById('loadingPercent').innerHTML = dlpercent + '%';
 		}
 	});
@@ -140,7 +140,8 @@ function youtubeDlDownload() {
 	temp.on('exit', (code) => {
 		document.getElementById('startDownload').disabled = false;
 		console.log("Exit Code: " + code);
-		document.getElementById('loadingBar').style.width = 0;
+		document.getElementById('loadingBar').style.visibility = 'invisible';
+		document.getElementById('loadingBar').style.color = 'rgb(255,0,0)';
 		document.getElementById('loadingPercent').innerHTML = "";
 		
 		if(newDownload){

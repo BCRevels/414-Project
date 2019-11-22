@@ -53,7 +53,7 @@
 
 	<!--Tabs-->
 	<div class="tabs" style="left:0;">
-		  <input class="btn btn-danger text-white" type="button" id="mainButton" onclick="toggleMain()" value="Main"/>
+		  <input class="btn btn-danger text-white" type="button" id="mainButton" onclick="toggleMain()" value="Download"/>
 		  <input class="btn btn-danger text-white" type="button" id="historyButton" onclick="toggleHistory()" value="History"/>
 		  <input class="btn btn-danger text-white" type="button" id="clearHistory" value="Clear History" onclick= "deleteHistory()" style="visibility:hidden;float:right"/>
     </div>
@@ -61,24 +61,20 @@
     <!-- URL desired is put here. Youtube-dl handles the rest.  As long as they have the same type and id, these
         should be able to be placed anywhere. Feel free to mess with the styling -->
 
-    <div class="row mt-4">
-      <div class="col"></div>
-      <div class="col-auto align-self-center">
-        <p id="header1 text-bold" class="font-weight-bold">Paste Video Links to download high quality videos with our
-          video downloader:</p>
-      </div>
-      <div class="col"></div>
-    </div>
+<br />
 
     <div class="row">
       <div class="col">
+	  <p id="header1 text-bold" class="font-weight-bold">Paste URL below to download</p>
         <input type="text" id="videoInput" class="form-control"
           placeholder="Ex: https://www.youtube.com/watch?v=9vuqI2v2IRs" />
         <!-- style="width: 40%; height: 7%; padding: 10px 24px; border-radius: 6px; margin-left:-70px" /> -->
       </div>
       <div class="col">
+	  <br />
+	  <p> </p>
         <select class="form-control" id="downloadType" type="list" list="downloadType" name="downloadType"
-          placeholder=" Download Type">
+          placeholder=" Download Type" style="width:45%;">
           <!-- style="width: 15%;  padding: 10px 24px; border-radius: 4px;" /> -->
           <option value="Video w/ Audio">Video w/ Audio</option>
           <option value="Video & Audio (Separate)">Video & Audio (Separate)</option>
@@ -88,22 +84,22 @@
       </div>
     </div>
 
-    <div class="row mt-4">
-      <div class="col"></div>
-      <div class="col-auto">
-        <p id="header2" class="font-weight-bold">Select the directory you want to download your files to:</p>
-      </div>
-      <div class="col"></div>
-    </div>
+<br/>
 
     <div class="row">
-      <div class="col">
-	  <form>
-        <input class="form-control" type="text" id="downloadDirectory" readonly placeholder="/home/user/Downloads" />
-        <!-- style="width: 56.5%; height: 5%; padding: 10px 24px; border-radius: 6px; margin-left:-70px" / -->
-		</form>
+	  <div class="col">
+	  
+	  <p id="header2" class="font-weight-bold">Download Directory:</p>
+	  <div class="form-group" style="width:70%;">
+	    <div class="form-row no-gutter">
+	      <div class="input-group">
+	        <button onclick="openDialogue()" style="width:8%">Browse</button>
+            <input class="form-control" type="text" id="downloadDirectory" readonly />
+		  </div>
+		</div>
+	  </div>
       </div>
-    </div>
+	</div>
 
     <div class="row mt-4">
       <div class="col align-self-center">
@@ -114,18 +110,16 @@
     <div class="row">
       <div class="col">
         <form>
-          <div class=" form-group">
+          <div class="form-group" style="width:70%">
             <div class="form-row no-gutter">
               <div class="input-group">
-                <input class="form-control" type="text" id="fileName" placeholder="Video1">
-                <!-- style="width: 47%; height: 5%; padding: 10px 24px; border-radius: 6px;" / -->
-                <div class="form-check form-check-inline input-group-append">
-                  <label class="container form-check-label">Use Default Name</label>
+			  <div class="form-check form-check-inline input-group-append">
+                  <label class="container form-check-label">Default</label>
                   <input class="form-check-input" type="checkbox" checked="" id="defaultCheck"
                     onclick="makeFileNameEditable()">
                   <span class="checkmark"></span>
                 </div>
-
+                <input class="form-control" type="text" id="fileName" readonly>
               </div>
             </div>
           </div>
@@ -133,7 +127,7 @@
       </div>
     </div>
     <!-- <br> -->
-
+	<br />
     <div class="row mb-4">
       <div class="col"></div>
       <div class="col-auto">
@@ -141,21 +135,18 @@
         <div class="btn-group" role="group">
           <button class="btn btn-success" type="button" id="startDownload" onclick="youtubeDlDownload()"
             value="Start Download">Start Download</button>
-          <button class="btn btn-danger" type="button" id="resetField" onclick="" value="Reset Fields">Reset
-            Fields</button>
-          <button class="btn btn-warning" type="button" id="historyButton" onclick="toggleHistory()"
-            value="History">Show
-            History</button>
         </div>
       </div>
       <div class="col"></div>
     </div>
 	
-	<svg width="90%" height="50" id="loadingBarContainer" style="align:center;margin-top:2%;margin-bottom:2%;border-style:solid;visibility:hidden;">
+	<center id='loadingObjects' style="display:none;">
+	<svg width="90%" height="50" id="loadingBarContainer" style="align:center;margin-top:2%;margin-bottom:2%;border-style:solid;">
 		<rect id="loadingBar" width="0" height="50" style="fill:rgb(0,150,0);stroke:black;stroke-width:4;"/>
 	</svg>
-	<img src="spinner.gif" id="spinner" width="30" height="30" style="visibility:hidden;" />
-	<p id="loadingPercent"></p>
+	<img src="spinner.gif" id="spinner" width="30" height="30" />
+	<p id="loadingPercent" style="font-size:150%;"></p>
+	</center>
 </div>
 </div>
 
@@ -171,9 +162,8 @@
 </div>
 </div>
 </div>
-
   <footer class="footer">
-    <p id="footer" class="text-center text-muted font-weight-bold">Copyright 2019 © Video Downloader. All Rights
+    <p id="footer" class="text-center text-muted font-weight-bold" style="position:fixed;bottom:0;width:100%;">Copyright 2019 © Video Downloader. All Rights
       Reserved
     </p>
   </footer>
@@ -201,24 +191,7 @@
     }
   </script>
 
-
-  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script> -->
-
   <script src="./renderer.js"></script>
-
-  <!-- 
-<div class="footer">
-<<<<<<< Updated upstream
-  <p>&copy; 2019 Video Downloader</p>
-</div> -->
 
 </body>
 

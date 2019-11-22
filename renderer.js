@@ -65,7 +65,7 @@ function youtubeDlDownload() {
 	var ext = '.%(ext)s';
 	if(document.getElementById('downloadType').value == 'Audio Only')
 		ext = '.wav';
-	else if(document.getElementById('downloadType').value == 'Audio and Video') {
+	else if(document.getElementById('downloadType').value == 'Video & Audio (Separate)') {
 		formatOptions = "-f \"bestvideo,bestaudio\" ";
 		formatName = '.f%(format_id)s';
 	}
@@ -87,9 +87,8 @@ function youtubeDlDownload() {
 	dlPath = dlPath + formatName + ext + '\" ';
 	
 	//make spinner and loading bar/percentage visible
-	document.getElementById('spinner').style.visibility = 'visible';
 	document.getElementById('loadingPercent').innerHTML = '0%';
-	document.getElementById('loadingBarContainer').style.visibility = 'visible';
+	document.getElementById('loadingObjects').style.display = 'block';
 	var newDownload = true;
 	
 	//get input and build values for sending to 
@@ -133,8 +132,7 @@ function youtubeDlDownload() {
 		document.getElementById('startDownload').disabled = false;
 		console.log("Exit Code: " + code);
 		document.getElementById('loadingBar').style.width = 0;
-		document.getElementById('loadingPercent').innerHTML = "";
-		document.getElementById('loadingBarContainer').style.visibility = 'hidden';
+		document.getElementById('loadingObjects').style.display = "none";
 		
 		if(newDownload){
 			if(code == 0) {
@@ -152,7 +150,7 @@ function youtubeDlDownload() {
 				
 				//add to history table
 				var histTable = document.getElementById('historyTable');
-				let row = histTable.insertRow(0);
+				let row = histTable.insertRow(1);
 				let titleRow = row.insertCell(0);
 				let time = row.insertCell(1);
 				titleRow.innerHTML = title;
@@ -163,6 +161,5 @@ function youtubeDlDownload() {
 		}
 		else
 			alert("Video has already been downloaded in this directory");
-		document.getElementById('spinner').style.visibility = 'hidden';
 	});
 }
